@@ -14,7 +14,6 @@
             </div>
         </div>
 
-
         <?= dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
@@ -26,6 +25,7 @@
                     ['label' => 'Конференции', 'icon' => 'fa fa-comments-o', 'url' => ['/conference']],
                     ['label' => 'Регионы', 'icon' => 'fa fa-list-alt', 'url' => ['/region']],
                     ['label' => 'Теги', 'icon' => 'fa fa-tags', 'url' => ['/tag']],
+                    ['label' => 'Направление деятельности', 'icon' => 'fa fa-tags', 'url' => ['/activity-directions']],
                     ['label' => 'Настройки + СЕО', 'icon' => 'fa fa-tags', 'url' => ['/theme/view']],
                     ['label' => 'Отзывы', 'icon' => 'fa fa-tags', 'url' => ['/review']],
                     ['label' => 'Страницы', 'icon' => 'fa fa-tags', 'url' => ['/pages']],

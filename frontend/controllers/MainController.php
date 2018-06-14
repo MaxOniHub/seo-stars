@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\data_mappers\ActivityDirectionDataMapper;
 use Yii;
 use frontend\components\VkAuth;
 use frontend\components\FbAuth;
@@ -32,20 +33,25 @@ class MainController extends MyController
 
     public function actionIndex()
     {
-        $company=new Company();
-        $mp=Mainpage::findOne(['id'=>1]);
-        return $this->render('index',[
-            'seo'=>Theme::findOne(['id'=>1]),
-            'city1'=>$company->getTableMain($mp->regions1, $mp->tags1, $mp->limit1, $mp->sort1),
-            'city2'=>$company->getTableMain($mp->regions2, $mp->tags2, $mp->limit2, $mp->sort2),
-            'top'=>$company->getTableMain($mp->regions3, $mp->tags3, $mp->limit3, $mp->sort3),
-            'whorst'=>$company->getTableMain($mp->regions4, $mp->tags4, $mp->limit4, $mp->sort4),
-            'lastcomments'=>(new Review())->getLast(),
-            'mp'=>$mp,
-            'bestcompanies'=>Company::findBestCompanies(),
-            'bestedcompanies'=>Company::findBestEDCompanies()
+        /** @var ActivityDirectionDataMapper $activityDirectionDataMapper */
+        $activityDirectionDataMapper = Yii::createObject(ActivityDirectionDataMapper::class);
+
+        $company = new Company();
+        $mp = Mainpage::findOne(['id' => 1]);
+        return $this->render('index', [
+            'seo' => Theme::findOne(['id' => 1]),
+            'city1' => $company->getTableMain($mp->regions1, $mp->tags1, $mp->limit1, $mp->sort1),
+            'city2' => $company->getTableMain($mp->regions2, $mp->tags2, $mp->limit2, $mp->sort2),
+            'top' => $company->getTableMain($mp->regions3, $mp->tags3, $mp->limit3, $mp->sort3),
+            'whorst' => $company->getTableMain($mp->regions4, $mp->tags4, $mp->limit4, $mp->sort4),
+            'lastcomments' => (new Review())->getLast(),
+            'mp' => $mp,
+            'bestcompanies' => Company::findBestCompanies(),
+            'bestedcompanies' => Company::findBestEDCompanies(),
+            'popularActivityDirections' => $activityDirectionDataMapper->getReadyToViewActivities()
         ]);
     }
+
     public function actionPages()
     {
         $pages=(new Pages())->getAll();

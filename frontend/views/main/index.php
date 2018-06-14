@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 use yii\helpers\Url;
+use frontend\components\PopularActivityDirectionsWidget;
 $this->title=$seo->main_title;
 
 $this->registerMetaTag([ 
@@ -14,6 +15,17 @@ $this->registerMetaTag([
 ]);
 $imgPath=Yii::$app->params['imgPath'];
 ?>
+
+<div class="container-fluid popular-activity-directions">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Популярные направляния продвижения</h2>
+        </div>
+        <div class="col-md-12">
+            <?= PopularActivityDirectionsWidget::widget(["items" => $popularActivityDirections]); ?>
+        </div>
+    </div>
+</div>
 
 <div class="container-fluid logodblock">
     <div class="row">

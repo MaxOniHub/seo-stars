@@ -25,7 +25,8 @@
         "kartik-v/yii2-widget-rating": "*",
         "moonlandsoft/yii2-phpexcel": "*",
         "himiklab/yii2-recaptcha-widget": "*",
-        "tonyaxo/yii2-recaptcha": "dev-master"
+        "tonyaxo/yii2-recaptcha": "dev-master",
+        "kartik-v/yii2-widget-switchinput": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -66,7 +66,9 @@ return [
                 'conference/<alias>'=>'conference/conference',
                 
                 'about'=>'main/about',
-                'contact'=>'main/contact'
+                'contact'=>'main/contact',
+
+                'types/<slug>' => 'activity-directions/get-by-type',
             ],
         ],
         /*'reCaptcha' => [
