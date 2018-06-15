@@ -21,7 +21,16 @@ use common\models\Region;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
-    
+
+
+    <?= $form->field($model, 'activities_ids')->widget(Select2::className(), [
+        'data' => \yii\helpers\ArrayHelper::map($entityForm->getActivities(), "id", "title"),
+        'options' => ['placeholder' => 'Выберите направление деятельности...', 'multiple' => true],
+        'pluginOptions' => [
+            'allowClear' => true,
+        ],
+    ])  ?>
+
     <?php $person = Person::find()->select(['name', 'id'])->indexBy('id')->column();?>
     <?= $form->field($model, 'person_id')->widget(Select2::className(), [
         'data' => $person,

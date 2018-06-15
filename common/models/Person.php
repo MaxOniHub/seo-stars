@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use EvgenyGavrilov\behavior\ManyToManyBehavior;
 use Yii;
 use yii\helpers\Url;
 /**
@@ -30,6 +31,16 @@ use yii\helpers\Url;
  */
 class Person extends \yii\db\ActiveRecord
 {
+    public $activities_ids;
+
+    public function behaviors()
+    {
+        return [
+            ManyToManyBehavior::className()
+        ];
+    }
+
+
     /**
      * @inheritdoc
      */
@@ -47,7 +58,7 @@ class Person extends \yii\db\ActiveRecord
             [['name', 'alias'], 'required'],
             [['raiting', 'reviews'], 'integer'],
             [['about', 'seo_keys', 'seo_desc'], 'string'],
-            [['tags', 'company_id', 'service_id'], 'safe'],
+            [['tags', 'company_id', 'service_id', 'activities_ids'], 'safe'],
             [['name', 'alias', 'vk_group', 'fb_group', 'seo_title'], 'string', 'max' => 255],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
             [['service_id'], 'exist', 'skipOnError' => true, 'targetClass' => Service::className(), 'targetAttribute' => ['service_id' => 'id']],
@@ -90,6 +101,7 @@ class Person extends \yii\db\ActiveRecord
             'seo_title' => 'SEO Заголовок',
             'seo_keys' => 'SEO Ключевые слова',
             'seo_desc' => 'SEO Описание',
+            'activities_ids' => 'Направления деятельности',
         ];
     }
 
@@ -131,5 +143,11 @@ class Person extends \yii\db\ActiveRecord
     public static function getAll()
     {
         return static::find()->orderBy('raiting DESC')->all();
+    }
+
+    public function getActivities()
+    {
+        return $this->hasMany(ActivityDirection::className(), ['id' => 'activity_id'])
+            ->viaTable('persons_activities', ['person_id' => 'id']);
     }
 }

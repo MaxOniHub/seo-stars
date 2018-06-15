@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\EntityForm;
 use Yii;
 use common\models\Conference;
 use common\models\ConferenceSearch;
@@ -66,13 +67,22 @@ class ConferenceController extends Controller
      * Creates a new Conference model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionCreate()
     {
         $model = new Conference();
+        /** @var EntityForm $EntityForm */
+        $EntityForm = Yii::createObject(EntityForm::class);
 
         if ($model->load(Yii::$app->request->post())) {
-            
+
+            /** Save activities directions mapping **/
+            if ($model->activities_ids) {
+                $model->setRelated('activities', $model->activities_ids, true);
+            }
+
+
             if(UploadedFile::getInstance($model, 'logo'))
             {
                 $model->logo=UploadedFile::getInstance($model, 'logo');
@@ -91,6 +101,7 @@ class ConferenceController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'entityForm' => $EntityForm
             ]);
         }
     }
@@ -100,15 +111,27 @@ class ConferenceController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        /** @var EntityForm $EntityForm */
+        $EntityForm = Yii::createObject(EntityForm::class);
+
         $model->tags=explode(", ", $model->tags);
         $model->regions=explode(", ", $model->regions);
         $img=$model->logo;
+
+        /** Init Activities for Company using relation **/
+        $model->activities_ids = $model->activities;
+
         if ($model->load(Yii::$app->request->post())) {
-            
+            /** Save activities directions mapping **/
+            if ($model->activities_ids) {
+                $model->setRelated('activities', $model->activities_ids, true);
+            }
             if(UploadedFile::getInstance($model, 'logo'))
             {
                 $model->logo=UploadedFile::getInstance($model, 'logo');
@@ -128,6 +151,7 @@ class ConferenceController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'entityForm' => $EntityForm
             ]);
         }
     }

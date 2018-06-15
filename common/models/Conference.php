@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use EvgenyGavrilov\behavior\ManyToManyBehavior;
 use Yii;
 
 /**
@@ -31,6 +32,15 @@ use Yii;
  */
 class Conference extends \yii\db\ActiveRecord
 {
+    public $activities_ids;
+
+    public function behaviors()
+    {
+        return [
+            ManyToManyBehavior::className()
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -48,7 +58,7 @@ class Conference extends \yii\db\ActiveRecord
             [['name', 'alias'], 'required'],
             [['person_id', 'company_id', 'site_link', 'raiting', 'reviews'], 'integer'],
             [['about', 'seo_keys', 'seo_desc'], 'string'],
-            [['tags', 'regions'], 'safe'],
+            [['tags', 'regions', 'activities_ids'], 'safe'],
             [['name', 'alias', 'site', 'vk_group', 'fb_group', 'seo_title'], 'string', 'max' => 255],
             [['person_id'], 'exist', 'skipOnError' => true, 'targetClass' => Person::className(), 'targetAttribute' => ['person_id' => 'id']],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
@@ -80,6 +90,7 @@ class Conference extends \yii\db\ActiveRecord
             'seo_title' => 'SEO Заголовок',
             'seo_keys' => 'SEO Ключевые слова',
             'seo_desc' => 'SEO Описание',
+            'activities_ids' => 'Направления деятельности',
         ];
     }
 
@@ -113,5 +124,11 @@ class Conference extends \yii\db\ActiveRecord
     public static function getAll()
     {
         return static::find()->orderBy('raiting DESC')->asArray()->all();
+    }
+
+    public function getActivities()
+    {
+        return $this->hasMany(ActivityDirection::className(), ['id' => 'activity_id'])
+            ->viaTable('conferences_activities', ['conference_id' => 'id']);
     }
 }
