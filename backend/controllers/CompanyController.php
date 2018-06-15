@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\CompanyForm;
+use backend\models\EntityForm;
 use common\models\CompanyActivities;
 use Yii;
 use common\models\Company;
@@ -91,8 +92,8 @@ class CompanyController extends Controller
     public function actionCreate()
     {
         $model = new Company();
-        /** @var CompanyForm $CompanyForm */
-        $CompanyForm = Yii::createObject(CompanyForm::class);
+        /** @var EntityForm $EntityForm */
+        $EntityForm = Yii::createObject(EntityForm::class);
 
         if ($model->load(Yii::$app->request->post()))
         {
@@ -120,7 +121,7 @@ class CompanyController extends Controller
         {
             return $this->render('create', [
                 'model' => $model,
-                'companyForm' => $CompanyForm
+                'entityForm' => $EntityForm
             ]);
         }
     }
@@ -135,8 +136,8 @@ class CompanyController extends Controller
      */
     public function actionUpdate($id)
     {
-        /** @var CompanyForm $CompanyForm */
-        $CompanyForm = Yii::createObject(CompanyForm::class);
+        /** @var EntityForm $EntityForm */
+        $EntityForm = Yii::createObject(EntityForm::class);
 
         $model = $this->findModel($id);
         $model->tags=explode(", ", $model->tags);
@@ -172,7 +173,7 @@ class CompanyController extends Controller
         {
             return $this->render('update', [
                 'model' => $model,
-                'companyForm' => $CompanyForm
+                'entityForm' => $EntityForm
             ]);
         }
     }

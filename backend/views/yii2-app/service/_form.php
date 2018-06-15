@@ -20,6 +20,14 @@ use common\models\Tag;
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'activities_ids')->widget(Select2::className(), [
+        'data' => \yii\helpers\ArrayHelper::map($entityForm->getActivities(), "id", "title"),
+        'options' => ['placeholder' => 'Выберите направление деятельности...', 'multiple' => true],
+        'pluginOptions' => [
+            'allowClear' => true,
+        ],
+    ])  ?>
+
     <?= $form->field($model, 'site')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'site_link')->dropDownList([0=>'Нет',1=>'Да']) ?>
 

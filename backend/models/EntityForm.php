@@ -8,7 +8,7 @@ use common\models\ActivityDirection;
  * Class CompanyForm
  * @package backend\models
  */
-class CompanyForm
+class EntityForm
 {
 
     /**

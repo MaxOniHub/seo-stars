@@ -22,7 +22,7 @@ use common\models\Region;
     <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'activities_ids')->widget(Select2::className(), [
-        'data' => \yii\helpers\ArrayHelper::map($companyForm->getActivities(), "id", "title"),
+        'data' => \yii\helpers\ArrayHelper::map($entityForm->getActivities(), "id", "title"),
         'options' => ['placeholder' => 'Выберите направление деятельности...', 'multiple' => true],
         'pluginOptions' => [
             'allowClear' => true,

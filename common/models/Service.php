@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use EvgenyGavrilov\behavior\ManyToManyBehavior;
 use Yii;
 use yii\helpers\Url;
 
@@ -31,6 +32,15 @@ use yii\helpers\Url;
  */
 class Service extends \yii\db\ActiveRecord
 {
+    public $activities_ids;
+
+    public function behaviors()
+    {
+        return [
+            ManyToManyBehavior::className()
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -47,7 +57,7 @@ class Service extends \yii\db\ActiveRecord
         return [
             [['name', 'alias'], 'required'],
             [['site_link', 'raiting', 'reviews'], 'integer'],
-            [['tags'], 'safe'],
+            [['tags', 'activities_ids'], 'safe'],
             [['about', 'seo_keys', 'seo_desc'], 'string'],
             [['name', 'alias', 'site', 'vk_group', 'fb_group', 'email', 'tel', 'seo_title'], 'string', 'max' => 255],
             ['logo','file','skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'checkExtensionByMimeType'=>false]
@@ -77,6 +87,7 @@ class Service extends \yii\db\ActiveRecord
             'seo_title' => 'SEO Заголовок',
             'seo_keys' => 'SEO Ключевые слова',
             'seo_desc' => 'SEO Описание',
+            'activities_ids' => 'Направления деятельности',
         ];
     }
     public $peoples_string="";
@@ -117,5 +128,11 @@ class Service extends \yii\db\ActiveRecord
     public static function getAll()
     {
         return static::find()->orderBy('raiting DESC')->asArray()->all();
+    }
+
+    public function getActivities()
+    {
+        return $this->hasMany(ActivityDirection::className(), ['id' => 'activity_id'])
+            ->viaTable('services_activities', ['service_id' => 'id']);
     }
 }
