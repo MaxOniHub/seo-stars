@@ -1,6 +1,8 @@
 <?php
 
 namespace common\models;
+
+use EvgenyGavrilov\behavior\ManyToManyBehavior;
 use Yii;
 use yii\helpers\Url;
 /**
@@ -24,6 +26,15 @@ use yii\helpers\Url;
  */
 class Company extends \yii\db\ActiveRecord
 {
+    public $activities_ids;
+
+    public function behaviors()
+    {
+        return [
+            ManyToManyBehavior::className()
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -60,6 +71,7 @@ class Company extends \yii\db\ActiveRecord
             [['tags', 'regions'], 'safe'],
             [['name', 'alias', 'site', 'vk_group', 'fb_group', 'tel', 'year'], 'string', 'max' => 255],
             ['email', 'email'],
+            ['activities_ids', 'safe'],
             ['logo','file','skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'checkExtensionByMimeType'=>false]
         ];
     }
@@ -90,6 +102,7 @@ class Company extends \yii\db\ActiveRecord
             'seo_title' => 'SEO Заголовок',
             'seo_keys' => 'SEO Ключевые слова',
             'seo_desc' => 'SEO Описание',
+            'activities_ids' => 'Направления деятельности',
         ];
     }
     public function getCompany($alias)
@@ -225,5 +238,11 @@ class Company extends \yii\db\ActiveRecord
     public static function findBestEDCompanies()
     {
         return self::find()->where(['like', 'tags', 'Обучение'])->orderBy('raiting DESC')->limit(14)->asArray()->all();
+    }
+
+    public function getActivities()
+    {
+        return $this->hasMany(ActivityDirection::className(), ['id' => 'activity_id'])
+            ->viaTable('company_activities', ['company_id' => 'id']);
     }
 }

@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Назначить для выво
 <div class="row">
     <div class="col-md-6">
         <?php $form = ActiveForm::begin(); ?>
+
         <?= $form->field($model, 'activities_ids')->widget(Select2::className(), [
             'data' => \yii\helpers\ArrayHelper::map($activities, "id", "title"),
             'options' => ['placeholder' => 'Выберите направление деятельности...', 'multiple' => true],

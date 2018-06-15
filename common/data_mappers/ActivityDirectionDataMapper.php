@@ -43,7 +43,7 @@ class ActivityDirectionDataMapper
 
     public function initReadyToViewActivities()
     {
-        $res =  $this->repository->find()->select("id")->where(["is_visible"=>1])->asArray()->column();
+        $res = $this->repository->find()->select("id")->where(["is_visible"=>1])->asArray()->column();
         $this->repository->activities_ids = $res;
     }
 

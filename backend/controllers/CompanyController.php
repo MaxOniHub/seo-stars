@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use backend\models\CompanyForm;
+use common\models\CompanyActivities;
 use Yii;
 use common\models\Company;
 use common\models\CompanySearch;
@@ -84,12 +86,21 @@ class CompanyController extends Controller
      * Creates a new Company model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionCreate()
     {
         $model = new Company();
+        /** @var CompanyForm $CompanyForm */
+        $CompanyForm = Yii::createObject(CompanyForm::class);
+
         if ($model->load(Yii::$app->request->post()))
         {
+            /** Save activities directions mapping **/
+            if ($model->activities_ids) {
+                $model->setRelated('activities', $model->activities_ids, true);
+            }
+
             if(UploadedFile::getInstance($model, 'logo'))
             {
                 $model->logo=UploadedFile::getInstance($model, 'logo');
@@ -109,6 +120,7 @@ class CompanyController extends Controller
         {
             return $this->render('create', [
                 'model' => $model,
+                'companyForm' => $CompanyForm
             ]);
         }
     }
@@ -118,15 +130,29 @@ class CompanyController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionUpdate($id)
     {
+        /** @var CompanyForm $CompanyForm */
+        $CompanyForm = Yii::createObject(CompanyForm::class);
+
         $model = $this->findModel($id);
         $model->tags=explode(", ", $model->tags);
         $model->regions=explode(", ", $model->regions);
         $img=$model->logo;
+
+        /** Init Activities for Company using relation **/
+        $model->activities_ids = $model->activities;
+
         if ($model->load(Yii::$app->request->post()))
         {
+            /** Save activities directions mapping **/
+            if ($model->activities_ids) {
+                $model->setRelated('activities', $model->activities_ids, true);
+            }
+
             if(UploadedFile::getInstance($model, 'logo'))
             {
                 $model->logo=UploadedFile::getInstance($model, 'logo');
@@ -146,6 +172,7 @@ class CompanyController extends Controller
         {
             return $this->render('update', [
                 'model' => $model,
+                'companyForm' => $CompanyForm
             ]);
         }
     }
@@ -155,10 +182,13 @@ class CompanyController extends Controller
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
+        CompanyActivities::deleteAll(["company_id" => $id]);
 
         return $this->redirect(['index']);
     }
