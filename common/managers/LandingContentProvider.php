@@ -12,10 +12,10 @@ use common\models\Theme;
 use Yii;
 
 /**
- * Class LandingContentProviderManager
+ * Class LandingContentProvider
  * @package common\managers
  */
-class LandingContentProviderManager
+class LandingContentProvider
 {
     /** @var Company **/
     private $Company;
@@ -33,12 +33,12 @@ class LandingContentProviderManager
     private $ActivityDirectionDataMapper;
 
     /**
-     * @var WidgetSettingsProviderManager
+     * @var WidgetSettingsProvider
      */
     private $WidgetsSettingsProviderManager;
 
     /**
-     * LandingContentProviderManager constructor.
+     * LandingContentProvider constructor.
      * @throws \yii\base\InvalidConfigException
      */
     public function __construct()
@@ -48,11 +48,11 @@ class LandingContentProviderManager
         $this->Review = Yii::createObject(Review::class);
         $this->ThemeSettings = Yii::createObject(Theme::class);
         $this->ActivityDirectionDataMapper = Yii::createObject(ActivityDirectionDataMapper::class);
-        $this->WidgetsSettingsProviderManager = Yii::createObject(WidgetSettingsProviderManager::class);
+        $this->WidgetsSettingsProviderManager = Yii::createObject(WidgetSettingsProvider::class);
     }
 
     /**
-     * @return WidgetSettingsProviderManager|object
+     * @return WidgetSettingsProvider|object
      */
     public function getWidgetSettingsProvider()
     {

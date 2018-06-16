@@ -2,21 +2,16 @@
 
 namespace frontend\controllers;
 
-use common\data_mappers\ActivityDirectionDataMapper;
-use common\managers\LandingContentProviderManager;
-use common\models\CompanyRatings;
+use common\managers\LandingContentProvider;
 use Yii;
 use frontend\components\VkAuth;
 use frontend\components\FbAuth;
 use frontend\models\ReviewForm;
 use common\models\User;
 use common\models\Theme;
-use common\models\Region;
-use common\models\Tag;
 use common\models\Company;
 use common\models\Review;
 use common\models\Pages;
-use common\models\Mainpage;
 use yii\helpers\Json;
 use frontend\components\Wall;
 use frontend\components\WallFB;
@@ -36,8 +31,8 @@ class MainController extends MyController
 
     public function actionIndex()
     {
-        /** @var LandingContentProviderManager $LandingContentProvider */
-        $LandingContentProvider = Yii::createObject(LandingContentProviderManager::class);
+        /** @var LandingContentProvider $LandingContentProvider */
+        $LandingContentProvider = Yii::createObject(LandingContentProvider::class);
 
         return $this->render('landing', [
             'reviews' => $LandingContentProvider->getReviews(),

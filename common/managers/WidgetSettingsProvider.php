@@ -6,10 +6,10 @@ use common\data_mappers\WidgetSettingsDataMapper;
 use common\helpers\WidgetsNamesHolder;
 
 /**
- * Class WidgetSettingsProviderManager
+ * Class WidgetSettingsProvider
  * @package common\managers
  */
-class WidgetSettingsProviderManager
+class WidgetSettingsProvider
 {
     /**
      * @var WidgetSettingsDataMapper
@@ -20,7 +20,7 @@ class WidgetSettingsProviderManager
     private $WidgetsNamesHolder;
 
     /**
-     * WidgetSettingsProviderManager constructor.
+     * WidgetSettingsProvider constructor.
      * @param WidgetSettingsDataMapper $dataMapper
      * @param WidgetsNamesHolder $widgetsNamesHolder
      */
