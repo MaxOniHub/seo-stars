@@ -27,6 +27,7 @@
                     ['label' => 'Теги', 'icon' => 'fa fa-tags', 'url' => ['/tag']],
                     ['label' => 'Направление деятельности', 'icon' => 'fa fa-tags', 'url' => ['/activity-directions']],
                     ['label' => 'Настройки + СЕО', 'icon' => 'fa fa-tags', 'url' => ['/theme/view']],
+                    ['label' => 'Настройки виджетов', 'icon' => 'fa fa-tags', 'url' => ['/widgets-settings']],
                     ['label' => 'Отзывы', 'icon' => 'fa fa-tags', 'url' => ['/review']],
                     ['label' => 'Страницы', 'icon' => 'fa fa-tags', 'url' => ['/pages']],
                     ['label' => 'Таблицы на глвной', 'icon' => 'fa fa-tags', 'url' => ['/mainpage/view']],

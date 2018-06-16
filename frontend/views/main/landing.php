@@ -1,5 +1,5 @@
 <section class="main-banner">
-    <?= $this->render("landing-partials/_main_banner") ?>
+    <?= $this->render("landing-partials/_main_banner", ["widgetSettings" => $widgetSettings]) ?>
 </section>
 
 <section class="section bg-stars">

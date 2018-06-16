@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\data_mappers\ActivityDirectionDataMapper;
+use common\managers\LandingContentProviderManager;
 use common\models\CompanyRatings;
 use Yii;
 use frontend\components\VkAuth;
@@ -35,26 +36,15 @@ class MainController extends MyController
 
     public function actionIndex()
     {
-        /** @var ActivityDirectionDataMapper $activityDirectionDataMapper */
-        $activityDirectionDataMapper = Yii::createObject(ActivityDirectionDataMapper::class);
-
-        $company = new Company();
-        $mp = Mainpage::findOne(['id' => 1]);
-        /** @var CompanyRatings $CompanyRaiting */
-        $CompanyRatings = Yii::createObject(CompanyRatings::class, [$company, $mp]);
+        /** @var LandingContentProviderManager $LandingContentProvider */
+        $LandingContentProvider = Yii::createObject(LandingContentProviderManager::class);
 
         return $this->render('landing', [
-            'city1' => $company->getTableMain($mp->regions1, $mp->tags1, $mp->limit1, $mp->sort1),
-            'city2' => $company->getTableMain($mp->regions2, $mp->tags2, $mp->limit2, $mp->sort2),
-
-            'reviews' => (new Review())->getLast(),
-            'companyRatings' => $CompanyRatings,
-            'themeSettings' => Theme::findOne(['id' => 1]),
-            'popularActivityDirections' => $activityDirectionDataMapper->getReadyToViewActivities(),
-
-            'bestcompanies' => Company::findBestCompanies(),
-            'bestedcompanies' => Company::findBestEDCompanies(),
-
+            'reviews' => $LandingContentProvider->getReviews(),
+            'companyRatings' => $LandingContentProvider->getCompanyRatings(),
+            'themeSettings' => $LandingContentProvider->getThemeSettings(),
+            'popularActivityDirections' => $LandingContentProvider->getPopularActivityDirections(),
+            'widgetSettings' => $LandingContentProvider->getWidgetSettingsProvider(),
         ]);
     }
 

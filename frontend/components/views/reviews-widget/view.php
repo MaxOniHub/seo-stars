@@ -1,7 +1,7 @@
 <ul class="testimonials-list-row">
     <?php foreach ($items as $item): ?>
         <li>
-            <div class="testimonial-card colored-pink">
+            <div class="testimonial-card colored-pink shadow">
                 <div class="round-photo">
                     <div class="image-cover">
                         <img src="<?= \yii\helpers\Url::to("img/testimonials/user.jpg") ?>" alt="User">
