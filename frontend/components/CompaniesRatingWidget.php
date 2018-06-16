@@ -4,7 +4,7 @@ namespace frontend\components;
 
 use yii\base\Widget;
 
-class PopularActivityDirectionsWidget extends Widget
+class CompaniesRatingWidget extends Widget
 {
     public $items;
 
@@ -15,7 +15,7 @@ class PopularActivityDirectionsWidget extends Widget
 
     public function run()
     {
-        return $this->render("popular-activity-directions-widget/view", ["items" => $this->items]);
+        return $this->render("companies-rating-widget/view", ["items" => $this->items]);
     }
 
 }

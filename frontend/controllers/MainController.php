@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\data_mappers\ActivityDirectionDataMapper;
+use common\models\CompanyRatings;
 use Yii;
 use frontend\components\VkAuth;
 use frontend\components\FbAuth;
@@ -21,7 +22,8 @@ use frontend\components\WallFB;
 
 class MainController extends MyController
 {
-    public $layout = "layout";    
+   public $layout = "landing";
+    //public $layout = "layout";
 
     public function beforeAction($action)
     {            
@@ -38,17 +40,21 @@ class MainController extends MyController
 
         $company = new Company();
         $mp = Mainpage::findOne(['id' => 1]);
-        return $this->render('index', [
-            'seo' => Theme::findOne(['id' => 1]),
+        /** @var CompanyRatings $CompanyRaiting */
+        $CompanyRatings = Yii::createObject(CompanyRatings::class, [$company, $mp]);
+
+        return $this->render('landing', [
             'city1' => $company->getTableMain($mp->regions1, $mp->tags1, $mp->limit1, $mp->sort1),
             'city2' => $company->getTableMain($mp->regions2, $mp->tags2, $mp->limit2, $mp->sort2),
-            'top' => $company->getTableMain($mp->regions3, $mp->tags3, $mp->limit3, $mp->sort3),
-            'whorst' => $company->getTableMain($mp->regions4, $mp->tags4, $mp->limit4, $mp->sort4),
-            'lastcomments' => (new Review())->getLast(),
-            'mp' => $mp,
+
+            'reviews' => (new Review())->getLast(),
+            'companyRatings' => $CompanyRatings,
+            'themeSettings' => Theme::findOne(['id' => 1]),
+            'popularActivityDirections' => $activityDirectionDataMapper->getReadyToViewActivities(),
+
             'bestcompanies' => Company::findBestCompanies(),
             'bestedcompanies' => Company::findBestEDCompanies(),
-            'popularActivityDirections' => $activityDirectionDataMapper->getReadyToViewActivities()
+
         ]);
     }
 
@@ -81,15 +87,23 @@ class MainController extends MyController
 
     public function actionCompany($alias, $uforom=false, $sort=false, $sort_desc=false)
     {
-        $company=(new Company(true))->getCompany($alias);
+        $this->layout = "layout";
+        $company=(new Company())->getCompany($alias);
         if($company->name)
         {
             $vkauth = new VkAuth($alias, 'company');
             $vkhref=$vkauth->getHref();
             $fbauth = new FbAuth($alias, 'company');
             $fbhref=$fbauth->getHref();
-            if($company->vk_group) {$wall=(new Wall($company->vk_group))->getWall();}
-            else if($company->fb_group && !$company->vk_group) {$fb_wall=(new WallFB($company->fb_group))->getWall();}
+
+            try {
+                if($company->vk_group) {$wall=(new Wall($company->vk_group))->getWall();}
+                else if($company->fb_group && !$company->vk_group) {$fb_wall=(new WallFB($company->fb_group))->getWall();}
+            }catch (yii\base\ErrorException $e)
+            {
+
+            }
+
             $model=new ReviewForm();
             $model->star=3;
             if ($model->load(Yii::$app->request->post()) && $model->validate()) 
