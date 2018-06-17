@@ -18,11 +18,13 @@ class CarouselAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        "css/carousel-widget.css"
+        "css/carousel-widget.css",
+        "css/slimbox2.css"
     ];
     public $js = [
         'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js',
-        'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
+        'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
+        'js/slimbox2.js'
     ];
 
     public $jsOptions = array(

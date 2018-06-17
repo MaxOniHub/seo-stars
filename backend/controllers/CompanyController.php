@@ -6,6 +6,7 @@ use backend\models\CompanyForm;
 use backend\models\EntityForm;
 use claviska\SimpleImage;
 use common\data_mappers\CompanyCasesDataMapper;
+use common\data_mappers\CompanyReviewsAndThanksDataMapper;
 use common\managers\FileUploaderManager;
 use common\models\CompanyActivities;
 use common\models\CompanyCases;
@@ -134,6 +135,24 @@ class CompanyController extends Controller
                 $CompanyCasesDataMapper->batchInsert($links, $model->id);
             }
 
+            /**
+             * Uploading thanks
+             */
+            if ($model->reviews_and_thanks = UploadedFile::getInstances($model, 'reviews_and_thanks'))
+            {
+                /** @var FileUploaderManager $FileUploaderManager */
+                $FileUploaderManager = Yii::createObject(FileUploaderManager::class);
+                /** @var CompanyReviewsAndThanksDataMapper $CompanyCasesDataMapper */
+                $CompanyReviewsAndThanksDataMapper = Yii::createObject(CompanyReviewsAndThanksDataMapper::class, [Yii::$app->db]);
+
+                $links = $FileUploaderManager
+                    ->setFileNamePattern("reviews")
+                    ->setUid($model->id)
+                    ->setTargetDirectory("company-reviews-and-thanks")
+                    ->bulkUpload($model->reviews_and_thanks);
+
+                $CompanyReviewsAndThanksDataMapper->batchInsert($links, $model->id);
+            }
 
             if($model->tags)
                 $model->tags = implode(", ", $model->tags);
@@ -210,6 +229,24 @@ class CompanyController extends Controller
                 $CompanyCasesDataMapper->batchInsert($links, $model->id);
             }
 
+            /**
+             * Uploading thanks
+             */
+            if ($model->reviews_and_thanks = UploadedFile::getInstances($model, 'reviews_and_thanks'))
+            {
+                /** @var FileUploaderManager $FileUploaderManager */
+                $FileUploaderManager = Yii::createObject(FileUploaderManager::class);
+                /** @var CompanyReviewsAndThanksDataMapper $CompanyCasesDataMapper */
+                $CompanyReviewsAndThanksDataMapper = Yii::createObject(CompanyReviewsAndThanksDataMapper::class, [Yii::$app->db]);
+
+                $links = $FileUploaderManager
+                    ->setFileNamePattern("reviews")
+                    ->setUid($model->id)
+                    ->setTargetDirectory("company-reviews-and-thanks")
+                    ->bulkUpload($model->reviews_and_thanks);
+
+                $CompanyReviewsAndThanksDataMapper->batchInsert($links, $model->id);
+            }
 
             if($model->tags)
                 $model->tags = implode(", ", $model->tags);

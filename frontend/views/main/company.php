@@ -97,7 +97,7 @@ $imgPath=Yii::$app->params['imgPath'];
 </div>
 
 <?php if ($company->casesFiles):?>
-    <?= \frontend\components\CompanyCaseslWidget::widget(["items" => $company->casesFiles])?>
+    <?= \frontend\components\CompanyImageCarouselWidget::widget(["items" => $company->casesFiles])?>
 <?php endif; ?>
 
 <?php Pjax::begin(['id' => 'my-pjax', 'timeout' => 500000]);?>

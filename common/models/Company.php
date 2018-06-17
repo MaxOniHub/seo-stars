@@ -14,6 +14,7 @@ use yii\helpers\Url;
  * @property string $site
  * @property integer $raiting
  * @property integer $reviews
+ * @property string $clients
  * @property string $vk_group
  * @property string $fb_group
  * @property string $regions
@@ -29,6 +30,8 @@ class Company extends \yii\db\ActiveRecord
     public $activities_ids;
 
     public $cases = [];
+
+    public $reviews_and_thanks = [];
 
     public function behaviors()
     {
@@ -69,11 +72,11 @@ class Company extends \yii\db\ActiveRecord
         return [
             [['name', 'alias'], 'required'],
             [['raiting', 'reviews', 'site_link'], 'integer'],
-            [['about', 'seo_title', 'seo_keys', 'seo_desc', 'videos'], 'string'],
+            [['about', 'seo_title', 'seo_keys', 'seo_desc', 'videos', 'clients'], 'string'],
             [['tags', 'regions'], 'safe'],
             [['name', 'alias', 'site', 'vk_group', 'fb_group', 'tel', 'year'], 'string', 'max' => 255],
             ['email', 'email'],
-            [['activities_ids', 'cases'], 'safe'],
+            [['activities_ids', 'cases', 'reviews_and_thanks'], 'safe'],
             ['logo','file','skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'checkExtensionByMimeType'=>false]
         ];
     }
@@ -92,6 +95,7 @@ class Company extends \yii\db\ActiveRecord
             'videos'=>'Видео с ютуба ( через ## каждое)',
             'raiting' => 'Рейтинг',
             'reviews' => 'Отзывы',
+            'clients' => 'Клиенты',
             'vk_group' => 'Группа VK',
             'fb_group' => 'Группа Fb',
             'regions' => 'Регионы',
@@ -106,6 +110,7 @@ class Company extends \yii\db\ActiveRecord
             'seo_desc' => 'SEO Описание',
             'activities_ids' => 'Направления деятельности',
             'cases' => 'Кейсы',
+            'reviews_and_thanks' => 'Отзывы и благодарности клиентов',
         ];
     }
     public function getCompany($alias)
@@ -252,5 +257,10 @@ class Company extends \yii\db\ActiveRecord
     public function getCasesFiles()
     {
         return $this->hasMany(CompanyCases::className(), ['company_id' => 'id']);
+    }
+
+    public function getReviewsAndThanksFiles()
+    {
+        return $this->hasMany(CompanyReviewsAndThanks::className(), ['company_id' => 'id']);
     }
 }

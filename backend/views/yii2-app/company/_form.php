@@ -56,6 +56,12 @@ use common\models\Region;
 
     <?php //$form->field($model, 'reviews')->textInput() ?>
 
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'clients')->textarea() ?>
+            <p><i><span class="badge label-warning">!</span> Перечисление через запятую</i></p>
+        </div>
+    </div>
 
     <div class="row">
 
@@ -103,21 +109,60 @@ use common\models\Region;
 
     </div>
 
-    <?php if ($model->logo) {
-        echo "<img style='width:100px;' src='" . Yii::$app->params['imgPath'] . $model->logo . "' alt='logo' />";
-    } ?>
-    <?= $form->field($model, 'logo')->fileInput() ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?=
+            $form->field($model, 'logo')->widget(FileInput::classname(), [
+                'options' => [
+                    'accept' => 'image/*',
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-md-6 text-center">
+            <div class="form-group" style="margin-top: 20px">
+                <?php if ($model->logo): ?>
+                    <img src="<?= Yii::$app->params['imgPath'] . $model->logo ?>" class="img-rounded" width="200"
+                         alt='logo'/>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
 
-    <?=
-    $form->field($model, 'cases[]')->widget(FileInput::classname(), [
-        'options' => [
-            'accept' => 'image/*',
-            'multiple' => true
-        ],
-    ]);
-    ?>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <?=
+            $form->field($model, 'cases[]')->widget(FileInput::classname(), [
+                'options' => [
+                    'accept' => 'image/*',
+                    'multiple' => true
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-md-12">
+            <?= \frontend\components\CompanyImageCarouselWidget::widget(["items" => $model->casesFiles, "id" => "carousel1"]) ?>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
 
-    <?= \frontend\components\CompanyCaseslWidget::widget(["items" => $model->casesFiles]) ?>
+            <?=
+            $form->field($model, 'reviews_and_thanks[]')->widget(FileInput::classname(), [
+                'options' => [
+                    'accept' => 'image/*',
+                    'multiple' => true
+                ],
+            ]);
+            ?>
+        </div>
+        <div class="col-md-12">
+            <?= \frontend\components\CompanyImageCarouselWidget::widget(["items" => $model->reviewsAndThanksFiles, "id" => "carousel2"]) ?>
+        </div>
+    </div>
+    <hr/>
 
     <?= $form->field($model, 'about')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
