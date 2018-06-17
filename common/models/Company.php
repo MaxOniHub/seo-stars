@@ -3,8 +3,8 @@
 namespace common\models;
 
 use EvgenyGavrilov\behavior\ManyToManyBehavior;
-use Yii;
 use yii\helpers\Url;
+
 /**
  * This is the model class for table "company".
  *
@@ -27,6 +27,8 @@ use yii\helpers\Url;
 class Company extends \yii\db\ActiveRecord
 {
     public $activities_ids;
+
+    public $cases = [];
 
     public function behaviors()
     {
@@ -71,7 +73,7 @@ class Company extends \yii\db\ActiveRecord
             [['tags', 'regions'], 'safe'],
             [['name', 'alias', 'site', 'vk_group', 'fb_group', 'tel', 'year'], 'string', 'max' => 255],
             ['email', 'email'],
-            ['activities_ids', 'safe'],
+            [['activities_ids', 'cases'], 'safe'],
             ['logo','file','skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'checkExtensionByMimeType'=>false]
         ];
     }
@@ -103,6 +105,7 @@ class Company extends \yii\db\ActiveRecord
             'seo_keys' => 'SEO Ключевые слова',
             'seo_desc' => 'SEO Описание',
             'activities_ids' => 'Направления деятельности',
+            'cases' => 'Кейсы',
         ];
     }
     public function getCompany($alias)
@@ -244,5 +247,10 @@ class Company extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ActivityDirection::className(), ['id' => 'activity_id'])
             ->viaTable('company_activities', ['company_id' => 'id']);
+    }
+
+    public function getCasesFiles()
+    {
+        return $this->hasMany(CompanyCases::className(), ['company_id' => 'id']);
     }
 }

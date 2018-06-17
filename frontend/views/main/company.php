@@ -51,6 +51,10 @@ $imgPath=Yii::$app->params['imgPath'];
                         <td id="tablerev"><?=$company->reviews;?></td>
                     </tr>
                     <tr>
+                        <th>Возраст домена</th>
+                        <td id="tablerev"><?=$company->year;?></td>
+                    </tr>
+                    <tr>
                         <th>Группа VK</th>
                         <td><a  target="_blank" href="<?=$company->vk_group;?>"><?=$company->vk_group;?></a></td>
                     </tr>
@@ -91,6 +95,10 @@ $imgPath=Yii::$app->params['imgPath'];
     <div class="row"><div class="col-md-12"><div class="strip"></div></div></div>
     <?php endif;?>
 </div>
+
+<?php if ($company->casesFiles):?>
+    <?= \frontend\components\CompanyCaseslWidget::widget(["items" => $company->casesFiles])?>
+<?php endif; ?>
 
 <?php Pjax::begin(['id' => 'my-pjax', 'timeout' => 500000]);?>
 <?php 

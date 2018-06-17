@@ -4,11 +4,17 @@ namespace backend\controllers;
 
 use backend\models\CompanyForm;
 use backend\models\EntityForm;
+use claviska\SimpleImage;
+use common\data_mappers\CompanyCasesDataMapper;
+use common\managers\FileUploaderManager;
 use common\models\CompanyActivities;
+use common\models\CompanyCases;
 use Yii;
 use common\models\Company;
 use common\models\CompanySearch;
 use backend\models\LoadFile;
+use yii\helpers\BaseFileHelper;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -88,6 +94,7 @@ class CompanyController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      * @throws \yii\base\InvalidConfigException
+     * @throws \yii\base\Exception
      */
     public function actionCreate()
     {
@@ -108,6 +115,26 @@ class CompanyController extends Controller
                 $model->logo->saveAs('../../frontend/web/mt/img/'.$model->logo->baseName.".".$model->logo->extension);
                 $model->logo=$model->logo->baseName.".".$model->logo->extension;   
             }
+            /**
+             * Uploading cases
+             */
+            if ($model->cases = UploadedFile::getInstances($model, 'cases'))
+            {
+                /** @var FileUploaderManager $FileUploaderManager */
+                $FileUploaderManager = Yii::createObject(FileUploaderManager::class);
+                /** @var CompanyCasesDataMapper $CompanyCasesDataMapper */
+                $CompanyCasesDataMapper = Yii::createObject(CompanyCasesDataMapper::class, [Yii::$app->db]);
+
+                $links = $FileUploaderManager
+                    ->setFileNamePattern("case")
+                    ->setUid($model->id)
+                    ->setTargetDirectory("company-cases")
+                    ->bulkUpload($model->cases);
+
+                $CompanyCasesDataMapper->batchInsert($links, $model->id);
+            }
+
+
             if($model->tags)
                 $model->tags = implode(", ", $model->tags);
             if($model->regions)
@@ -133,6 +160,7 @@ class CompanyController extends Controller
      * @return mixed
      * @throws NotFoundHttpException
      * @throws \yii\base\InvalidConfigException
+     * @throws \yii\base\Exception
      */
     public function actionUpdate($id)
     {
@@ -162,6 +190,27 @@ class CompanyController extends Controller
             }
             else
                 $model->logo=$img;
+
+            /**
+             * Uploading cases
+             */
+            if ($model->cases = UploadedFile::getInstances($model, 'cases'))
+            {
+                /** @var FileUploaderManager $FileUploaderManager */
+                $FileUploaderManager = Yii::createObject(FileUploaderManager::class);
+                /** @var CompanyCasesDataMapper $CompanyCasesDataMapper */
+                $CompanyCasesDataMapper = Yii::createObject(CompanyCasesDataMapper::class, [Yii::$app->db]);
+
+                $links = $FileUploaderManager
+                   ->setFileNamePattern("case")
+                   ->setUid($model->id)
+                   ->setTargetDirectory("company-cases")
+                   ->bulkUpload($model->cases);
+
+                $CompanyCasesDataMapper->batchInsert($links, $model->id);
+            }
+
+
             if($model->tags)
                 $model->tags = implode(", ", $model->tags);
             if($model->regions)
