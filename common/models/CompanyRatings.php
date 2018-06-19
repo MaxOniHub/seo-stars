@@ -24,12 +24,12 @@ class CompanyRatings
 
     public function getTopInUkraine()
     {
-        return $this->repository->getTableMain($this->settings->regions4, $this->settings->tags4, $this->settings->limit4, $this->settings->sort4);;
+        return $this->repository->getTableMain($this->settings->regions4, $this->settings->tags4, $this->settings->limit4, $this->settings->sort4);
     }
 
     public function getTopInRussia()
     {
-        return $this->repository->getTableMain($this->settings->regions3, $this->settings->tags3, $this->settings->limit3, $this->settings->sort3);;
+        return $this->repository->getTableMain($this->settings->regions3, $this->settings->tags3, $this->settings->limit3, $this->settings->sort3);
     }
 
     public function getTopTeachingSEO()

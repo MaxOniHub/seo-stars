@@ -18,6 +18,19 @@ use common\models\Region;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
+   <?= \frontend\components\ProfileCompleteStatusBarWidget::widget(["percents" => $model->profile_complete_status, "caption" => "Заполненность профиля"])?>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'profile_complete_status')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($model, 'raiting')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+
+
     <div class="row">
 
         <div class="col-md-6">

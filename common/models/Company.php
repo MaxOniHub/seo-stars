@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use backend\behaviors\CompanyCompleteProfileBehavior;
+use backend\behaviors\CompanyRatingModifierBehavior;
 use EvgenyGavrilov\behavior\ManyToManyBehavior;
 use yii\helpers\Url;
 
@@ -24,6 +26,7 @@ use yii\helpers\Url;
  * @property string $about
  * @property string $e-mail
  * @property string $tel
+ * @property integer $profile_complete_status
  */
 class Company extends \yii\db\ActiveRecord
 {
@@ -36,7 +39,13 @@ class Company extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            ManyToManyBehavior::className()
+            ManyToManyBehavior::className(),
+            'profileChecker' => [
+                'class' => CompanyCompleteProfileBehavior::className()
+            ],
+            'ratingModifier' => [
+                'class' => CompanyRatingModifierBehavior::className()
+            ],
         ];
     }
 
@@ -71,7 +80,7 @@ class Company extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'alias'], 'required'],
-            [['raiting', 'reviews', 'site_link'], 'integer'],
+            [['raiting', 'reviews', 'site_link', 'profile_complete_status'], 'integer'],
             [['about', 'seo_title', 'seo_keys', 'seo_desc', 'videos', 'clients'], 'string'],
             [['tags', 'regions'], 'safe'],
             [['name', 'alias', 'site', 'vk_group', 'fb_group', 'tel', 'year'], 'string', 'max' => 255],
@@ -111,6 +120,7 @@ class Company extends \yii\db\ActiveRecord
             'activities_ids' => 'Направления деятельности',
             'cases' => 'Кейсы',
             'reviews_and_thanks' => 'Отзывы и благодарности клиентов',
+            'profile_complete_status' => 'Статус наполненности профиля',
         ];
     }
     public function getCompany($alias)
@@ -190,7 +200,7 @@ class Company extends \yii\db\ActiveRecord
             $query=$query->limit($limit);
         else
             $query=$query->limit(12);
-        return $query->asArray()->all();
+        return $query->joinWith(["casesFiles"])->asArray()->all();
     }
     public function getTableFromPage($page)
     {

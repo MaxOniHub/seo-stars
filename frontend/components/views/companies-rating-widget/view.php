@@ -1,3 +1,9 @@
+<style>
+    .table tbody .stage-full td:last-child:after
+    {
+        position: initial;
+    }
+</style>
 <div class="table-responsive">
     <table class="table calc-width">
         <thead>
@@ -13,11 +19,12 @@
 
         <?php foreach ($items as $key => $item): ?>
             <tr class="stage-full">
-                <td class="numb"><?= $key ?></td>
+                <td class="numb"><?= $key+1 ?></td>
                 <td class="company"><?= $item["name"] ?></td>
-                <td>3897</td>
-                <td><?= $item["rating"]?></td>
+                <td><?= $widget->countCases($item["casesFiles"])?></td>
+                <td><?= $item["raiting"]?></td>
                 <td><?= $item["reviews"]?></td>
+                <td style="background-color: <?= $widget->getColor($item["profile_complete_status"])?>"></td>
             </tr>
         <?php endforeach; ?>
 
