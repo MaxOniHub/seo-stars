@@ -1,6 +1,7 @@
 <?php
 
 use kartik\file\FileInput;
+use kartik\touchspin\TouchSpin;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\ckeditor\CKEditor;
@@ -18,15 +19,31 @@ use common\models\Region;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-   <?= \frontend\components\ProfileCompleteStatusBarWidget::widget(["percents" => $model->profile_complete_status, "caption" => "Заполненность профиля"])?>
-
     <div class="row">
 
         <div class="col-md-6">
-            <?= $form->field($model, 'profile_complete_status')->textInput(['maxlength' => true]) ?>
+            <?= \frontend\components\ProfileCompleteStatusBarWidget::widget(["percents" => $model->profile_complete_status, "caption" => "Профиль заполнен на "])?>
         </div>
         <div class="col-md-6">
-            <?= $form->field($model, 'raiting')->textInput(['maxlength' => true]) ?>
+            <div class="row">
+            <div class="col-md-6">
+                <?=
+                $form->field($model, 'raiting')->widget(TouchSpin::classname(), [
+                    'options'=>['placeholder'=>'Enter rating 1 to 5...'],
+                    'pluginOptions' => [
+                        'verticalbuttons' => true,
+                        'verticalupclass' => 'glyphicon glyphicon-plus',
+                        'verticaldownclass' => 'glyphicon glyphicon-minus',
+                    ]
+                ]);
+                ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'profile_complete_status')->textInput(['maxlength' => true, "disabled" => true]) ?>
+            </div>
+            </div>
+
+
         </div>
     </div>
 

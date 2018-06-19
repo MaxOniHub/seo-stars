@@ -29,7 +29,8 @@
         "kartik-v/yii2-widget-switchinput": "*",
         "evgeny-gavrilov/yii2-many-to-many": "^1.1",
         "kartik-v/yii2-widget-fileinput": "@dev",
-        "claviska/simpleimage": "^3.3"
+        "claviska/simpleimage": "^3.3",
+        "kartik-v/yii2-widget-touchspin": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

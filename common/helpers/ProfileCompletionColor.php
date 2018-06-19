@@ -8,10 +8,10 @@ namespace common\helpers;
  */
 class ProfileCompletionColor
 {
-    const LOW = "#e8fce3";
-    const MEDIUM = "#cff7c5";
-    const HIGH = "#8ff975";
-    const FULL = "#3bd117";
+    const LOW = "#ddfeed";
+    const MEDIUM = "#ddfeed";
+    const HIGH = "#abfdd3";
+    const FULL = "#72e8ac";
 
     /**
      * @param $value

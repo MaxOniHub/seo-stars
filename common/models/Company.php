@@ -120,7 +120,7 @@ class Company extends \yii\db\ActiveRecord
             'activities_ids' => 'Направления деятельности',
             'cases' => 'Кейсы',
             'reviews_and_thanks' => 'Отзывы и благодарности клиентов',
-            'profile_complete_status' => 'Статус наполненности профиля',
+            'profile_complete_status' => 'Статус наполненности профиля(%)',
         ];
     }
     public function getCompany($alias)
