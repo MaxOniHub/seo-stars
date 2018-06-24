@@ -161,7 +161,8 @@ class Company extends \yii\db\ActiveRecord
     }
     public function getTableMain($regions, $tags, $limit, $sort)
     {
-        $query=static::find();
+        $query = $this->find()->joinWith(["casesFiles"]);
+
         if($regions)
         {
             $regions=explode(", ", $regions);
@@ -200,7 +201,8 @@ class Company extends \yii\db\ActiveRecord
             $query=$query->limit($limit);
         else
             $query=$query->limit(12);
-        return $query->joinWith(["casesFiles"])->asArray()->all();
+
+        return $query->groupBy("id")->asArray()->all();
     }
     public function getTableFromPage($page)
     {

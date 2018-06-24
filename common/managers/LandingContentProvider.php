@@ -29,9 +29,6 @@ class LandingContentProvider
     /** @var Theme **/
     private $ThemeSettings;
 
-    /** @var ActivityDirectionDataMapper **/
-    private $ActivityDirectionDataMapper;
-
     /**
      * @var WidgetSettingsProvider
      */
@@ -47,7 +44,6 @@ class LandingContentProvider
         $this->MainPageSettings = \Yii::createObject(Mainpage::class);
         $this->Review = Yii::createObject(Review::class);
         $this->ThemeSettings = Yii::createObject(Theme::class);
-        $this->ActivityDirectionDataMapper = Yii::createObject(ActivityDirectionDataMapper::class);
         $this->WidgetsSettingsProviderManager = Yii::createObject(WidgetSettingsProvider::class);
     }
 
@@ -85,12 +81,5 @@ class LandingContentProvider
         return $this->Review->getLast();
     }
 
-    /**
-     * @return array|\yii\db\ActiveRecord[]
-     */
-    public function getPopularActivityDirections()
-    {
-        return $this->ActivityDirectionDataMapper->getReadyToViewActivities();
-    }
 
 }

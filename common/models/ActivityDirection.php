@@ -55,4 +55,9 @@ class ActivityDirection extends \yii\db\ActiveRecord
             'activities_ids' => Yii::t("app", "Направления деятельности"),
         ];
     }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
 }

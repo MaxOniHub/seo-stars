@@ -10,7 +10,7 @@ use yii\helpers\Json;
 
 class MyController extends \yii\web\Controller
 {
-    public $layout = "layout";    
+    public $layout = "common";
 
     public function beforeAction($action)
     {            

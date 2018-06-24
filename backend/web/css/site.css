@@ -115,3 +115,19 @@ a.desc:after {
 {
     margin-top: 32px;
 }
+.grid-view span.btn
+{
+    cursor: default;
+    border: none;
+    border-radius: 0;
+    background-color: #4e5354;
+}
+
+.grid-view span.btn:hover
+{
+    background-color: #4e5354;
+}
+.grid-view table tbody tr td
+{
+    vertical-align: middle;
+}

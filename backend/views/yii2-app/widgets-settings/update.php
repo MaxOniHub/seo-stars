@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 <div class="activity-direction-update">
 
-    <?= $this->render('_counters_top_page', [
+    <?= $this->render($view, [
         'model' => $model,
     ]) ?>
 

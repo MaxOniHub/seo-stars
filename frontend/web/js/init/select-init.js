@@ -1,1 +1,1 @@
-$('select').selecter();
+$('.selecter').selecter();

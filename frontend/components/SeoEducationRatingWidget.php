@@ -4,7 +4,7 @@ namespace frontend\components;
 
 use yii\base\Widget;
 
-class ReviewsWidget extends Widget
+class SeoEducationRatingWidget extends Widget
 {
     public $items;
 
@@ -15,7 +15,8 @@ class ReviewsWidget extends Widget
 
     public function run()
     {
-        return $this->render("reviews-widget/view", ["items" => $this->items]);
+        return $this->render("seo-education-rating-widget/view", ["items" => $this->items, "widget" => $this]);
     }
+
 
 }

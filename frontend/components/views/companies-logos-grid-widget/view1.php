@@ -4,7 +4,7 @@ use yii\helpers\Url;
 
 $limit = 5;
 ?>
-<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+<div class="col-xs-12 col-md-10 col-md-offset-1">
     <ul class="rating-companies-list horizontal top-offset">
         <?php foreach ($items as $key => $item): ?>
             <?php if ($key < $limit) : ?>

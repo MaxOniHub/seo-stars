@@ -172,7 +172,7 @@ use common\models\Region;
             ?>
         </div>
         <div class="col-md-12">
-            <?= \frontend\components\CompanyImageCarouselWidget::widget(["items" => $model->casesFiles, "id" => "carousel1"]) ?>
+            <?= \frontend\components\CompanyImageCarouselWidget::widget(["items" => $model->casesFiles, "id" => "carousel1", "carousel" => "bootstrap"]) ?>
         </div>
     </div>
     <hr/>
@@ -189,7 +189,7 @@ use common\models\Region;
             ?>
         </div>
         <div class="col-md-12">
-            <?= \frontend\components\CompanyImageCarouselWidget::widget(["items" => $model->reviewsAndThanksFiles, "id" => "carousel2"]) ?>
+            <?= \frontend\components\CompanyImageCarouselWidget::widget(["items" => $model->reviewsAndThanksFiles, "id" => "carousel2",  "carousel" => "bootstrap"]) ?>
         </div>
     </div>
     <hr/>

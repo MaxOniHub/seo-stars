@@ -21,6 +21,8 @@ use frontend\components\WallFB;
 
 class ServiceController extends MyController
 {
+    public $layout = "common";
+
     public function actionServices()
     {
         $service=Service::getAll();

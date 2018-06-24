@@ -12,4 +12,6 @@ interface IWidgetSettings
     public function getKey();
 
     public function getTitle();
+
+    public function getView();
 }

@@ -3,7 +3,7 @@
 </div>
 <div class="row">
     <div class="col-xs-12 col-md-10 col-md-offset-1">
-        <?= \frontend\components\PopularActivityDirectionsWidget::widget(["items" => $popularActivityDirections]) ?>
+        <?= \frontend\components\PopularActivityDirectionsWidget::widget() ?>
     </div>
 </div>
 

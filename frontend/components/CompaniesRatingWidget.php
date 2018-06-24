@@ -28,6 +28,11 @@ class CompaniesRatingWidget extends Widget
         return $this->ProfileCompletionColor->getColor($value);
     }
 
+    public function getClass($value)
+    {
+        return $this->ProfileCompletionColor->getClass($value);
+    }
+
     public function countCases($cases)
     {
         return count($cases);

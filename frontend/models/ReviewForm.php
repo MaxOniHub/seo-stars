@@ -24,7 +24,7 @@ class ReviewForm extends Model
             [['text', 'star'], 'required'],
             ['text', 'string'],
             ['star', 'integer'],
-            ['reCaptcha', 'required', 'message'=>'Подтвердите, что вы не робот']
+            ['reCaptcha', 'safe', 'message'=>'Подтвердите, что вы не робот']
             //[['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6Lf0PSoUAAAAAHbRNiMvDYO268ROEK1z9icL_zjj', 'uncheckedMessage' => 'Подтвержите, что вы не робот']
             //[['reCaptcha'], \recaptcha\ReCaptcha::className()]
         ];
@@ -87,7 +87,7 @@ class ReviewForm extends Model
         $review->text=Html::encode($this->text);
         $review->stars=Html::encode($this->star);
         $count=$this->getCount($review->stars);
-        $review->user_id=Yii::$app->user->identity->id;
+        $review->user_id= Yii::$app->user->identity->id ? : 0;
         $review->company_id=$id;
         $review->date=date('U');
         $review->likes=0;

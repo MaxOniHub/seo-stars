@@ -10,7 +10,7 @@
 	function getOptionsTree(optionsList) {
 		var tree = "<ul>";
 		optionsList.map(function(option){
-			tree += "<li class=\""+(option.disabled ? 'disabled' : '')+"\" data-value=\""+option.value+"\">"+option.label+"</li>";
+			tree += "<li class=\""+(option.disabled ? 'disabled' : '')+"\" data-value=\""+option.value+"\" data-label=\""+option.label+"\">"+((option.image ? '<img src="'+option.image+'"/>' : '') + option.label)+"</li>";
 		});
 		tree += "</ul>";
 		return tree;
@@ -23,7 +23,8 @@
 				optionsList.push({
 					label: option.label,
 					value: option.value,
-					disabled: option.disabled
+					disabled: option.disabled,
+					image: $(option).data('image') || null
 				});
 				if (option && i === 0){
 					selected = {
@@ -74,10 +75,10 @@
 	// setting
 
 	// ctx - select
-	function setValue(ctx, value, result, settings){
+	function setValue(ctx, value, result, settings, event){
 		$(ctx).val(value).trigger('change');
 		change(result, settings, $(ctx).val());
-		$(result).find('.anchor').html($(ctx).val());
+		$(result).find('.anchor').html($(event.target).html());
 		close(result, settings);
 	}
 
@@ -93,12 +94,11 @@
 			onChange: null
 		}
 
+		var optionsList = [];
 
 		var settings = $.extend(settings, options);
 
 		this.each(function(i, select){
-
-			var optionsList = [];
 
 			$(select).hide();
 
@@ -121,7 +121,7 @@
 					close(result, settings);
 					return;
 				}
-				setValue(select, $(this).data('value'), result, settings);
+				setValue(select, $(this).data('value'), result, settings, e);
 			});
 
 			result.insertAfter($(select));

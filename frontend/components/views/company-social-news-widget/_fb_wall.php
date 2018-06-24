@@ -1,0 +1,24 @@
+<hr/>
+<div class="row">
+    <h2>Новости от <?= $company["name"]; ?></h2>
+    <div class="row">
+        <?php
+        for ($i = 0; $i < count($wall); $i++) {
+            if ($wall[$i]->message) { ?>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="panel panel-info">
+                        <div class="panel-body">
+                            <div class="wall_text">
+                                <?= $widget->parseStringToLink($wall[$i]->message); ?>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <?= $widget->getDateByFormat(strtotime($wall[$i]->created_time)); ?>
+                        </div>
+                    </div>
+                </div>
+            <?php }
+        } ?>
+    </div>
+</div>
+

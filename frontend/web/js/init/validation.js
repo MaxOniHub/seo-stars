@@ -49,10 +49,9 @@ $(function() {
     return re.test(number);
   };
   $('.validate-form').on('submit', function(e) {
-    var error, errors, hasErrors, isFormScrolled, j, len, scrollTarget;
+    var error, errors, hasErrors, j, len;
+    e.preventDefault();
     errors = [false, false];
-    isFormScrolled = false;
-    scrollTarget = $(this).parents('.popup').length !== 0 ? $('.popup') : $('html, body');
     $('input:not(.ignored), textarea:not(.ignored)', this).each(function(i, input) {
       $(input).siblings('.icon-success').removeClass('active');
       if ($(input).hasClass('email') && !isValidEmail($(input).val().trim())) {
@@ -86,7 +85,6 @@ $(function() {
         $(input).parents('.form-group').removeClass('error');
       }
     });
-    hasErrors = false;
     for (j = 0, len = errors.length; j < len; j++) {
       error = errors[j];
       if (error) {
@@ -95,15 +93,6 @@ $(function() {
         $('.form-head').addClass('error');
         return;
       }
-    }
-    if (!hasErrors) {
-      e.preventDefault();
-      hideNav();
-      window.CallPopup($(this).data('success'));
-      $(this).parents('.success-fadeout').addClass('active');
-      $(this).parents('.success-fadeout').children('.success-fadein').fadeIn();
-      $($(this).data('submit')).addClass('opened');
-      $(this).parents('.choose-project-section').removeClass('active opened animated');
     }
   });
   $('.file-input').on('change', function() {

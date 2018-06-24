@@ -1,9 +1,13 @@
 <?php
 namespace backend\controllers;
 
+use backend\helpers\WidgetsSettingsFactory;
 use common\data_mappers\WidgetSettingsDataMapper;
+use common\helpers\WidgetsNamesHolder;
+use common\interfaces\IWidgetSettings;
 use common\models\ActivityDirectionSearch;
-use common\models\CountersTopPageSettings;
+use common\models\CountersTopPageWidgetSettings;
+use common\models\RegionsWidgetSettings;
 use common\models\WidgetsSettings;
 use common\models\WidgetsSettingsSearch;
 use Yii;
@@ -61,20 +65,24 @@ class WidgetsSettingsController extends Controller
     {
         /** @var WidgetSettingsDataMapper $WidgetSettingsDataMapper */
         $WidgetSettingsDataMapper = Yii::createObject(WidgetSettingsDataMapper::class);
-        /** @var CountersTopPageSettings $counterTopPage */
-        $counterTopPage = Yii::createObject(CountersTopPageSettings::class);
         /** @var WidgetsSettings $widgetSettings */
         $widgetSettings = $WidgetSettingsDataMapper->findByPrimaryKey($id);
-        $counterTopPage->initSettings($widgetSettings);
+        /** @var WidgetsSettingsFactory $WidgetsSettingsFactory */
+        $WidgetsSettingsFactory = Yii::createObject(WidgetsSettingsFactory::class);
 
-        if ($counterTopPage->load(Yii::$app->request->post()))
+        /** @var IWidgetSettings $widget */
+        $widget = $WidgetsSettingsFactory->getWidgetSettings($id);
+        $widget->initSettings($widgetSettings);
+
+        if ($widget->load(Yii::$app->request->post()))
         {
-            $WidgetSettingsDataMapper->load($counterTopPage);
+            $WidgetSettingsDataMapper->load($widget);
             $WidgetSettingsDataMapper->save();
         }
 
         return $this->render('update', [
-            'model' => $counterTopPage,
+            'model' => $widget,
+            'view' => $widget->getView()
         ]);
 
     }

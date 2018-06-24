@@ -9,4 +9,6 @@ namespace common\helpers;
 class WidgetsNamesHolder
 {
     const COUNTERS_TOP_PAGE = "counters_top_page";
+
+    const REGIONS = "regions";
 }

@@ -23,10 +23,10 @@ class PersonController extends MyController
 {
     public function actionPersons()
     {
-        $person=Person::getAll();
-        return $this->render('persons',[
-            'person'=>$person,
-            'seo'=>Theme::findOne(['id'=>1])
+        $persons = Person::getAll();
+        return $this->render('persons', [
+            'persons' => $persons,
+            'seo' => Theme::findOne(['id' => 1])
         ]);
     }
 

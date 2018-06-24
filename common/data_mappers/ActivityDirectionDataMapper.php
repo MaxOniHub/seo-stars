@@ -25,6 +25,11 @@ class ActivityDirectionDataMapper
         $this->repository = $activityDirection;
     }
 
+    public function getByAlias($alias)
+    {
+        return $this->repository->find()->where(["alias" => $alias])->one();
+    }
+
     /**
      * @return ActivityDirection|ActiveRecord
      */

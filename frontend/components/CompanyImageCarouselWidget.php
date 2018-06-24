@@ -12,6 +12,12 @@ class CompanyImageCarouselWidget extends CustomCarouselWidget
 
     public $id = "carousel";
 
+    public $carousel;
+
+    private $bootstrap = "bootstrap-image-carousel-widget/view";
+
+    private $owl = "owl-image-carousel-widget/view";
+
     public function init()
     {
         parent::init();
@@ -20,7 +26,15 @@ class CompanyImageCarouselWidget extends CustomCarouselWidget
     public function run()
     {
         if ($this->items)
-            return $this->render("company-image-carousel-widget/view", ["items" => $this->items, "id" => $this->id]);
-}
+            return $this->render($this->getCarousel(), ["items" => $this->items, "id" => $this->id]);
+    }
+
+    private function getCarousel()
+    {
+        if ($this->carousel == "bootstrap")
+            return $this->bootstrap;
+
+        return $this->owl;
+    }
 
 }

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\data_mappers\CompanyDataMapper;
 use common\managers\LandingContentProvider;
 use Yii;
 use frontend\components\VkAuth;
@@ -18,7 +19,7 @@ use frontend\components\WallFB;
 
 class MainController extends MyController
 {
-   public $layout = "landing";
+   public $layout = "common";
     //public $layout = "layout";
 
     public function beforeAction($action)
@@ -31,6 +32,8 @@ class MainController extends MyController
 
     public function actionIndex()
     {
+        $this->layout = "landing";
+
         /** @var LandingContentProvider $LandingContentProvider */
         $LandingContentProvider = Yii::createObject(LandingContentProvider::class);
 
@@ -38,7 +41,6 @@ class MainController extends MyController
             'reviews' => $LandingContentProvider->getReviews(),
             'companyRatings' => $LandingContentProvider->getCompanyRatings(),
             'themeSettings' => $LandingContentProvider->getThemeSettings(),
-            'popularActivityDirections' => $LandingContentProvider->getPopularActivityDirections(),
             'widgetSettings' => $LandingContentProvider->getWidgetSettingsProvider(),
         ]);
     }
@@ -51,35 +53,41 @@ class MainController extends MyController
             'pages'=>$pages
         ]);
     }
+
     public function actionPage($alias)
     {
-        $page=(new Pages())->getOneinAlias($alias);
-        if($page->add_table)
-            $comp=(new Company())->getTableFromPage($page);
-        return $this->render('page',[
-            'page'=>$page,
-            'comp'=>$comp
+        $companies = [];
+        $page = (new Pages())->getOneinAlias($alias);
+        if ($page->add_table)
+            $companies = (new Company())->getTableFromPage($page);
+        return $this->render('page', [
+            'page' => $page,
+            'companies' => $companies
         ]);
     }
+
     public function actionRaiting()
     {
-        $comp=(new Company())->getAll();
+        /** @var CompanyDataMapper $companyDataMapper */
+        $companyDataMapper = Yii::createObject(CompanyDataMapper::class);
+        $companies = $companyDataMapper->getAll();
+        $seo = Theme::findOne(['id'=>1]);
+
         return $this->render('raiting',[
-            'comp'=>$comp,
-            'seo'=>Theme::findOne(['id'=>1])
+            'companies'=> $companies,
+            'seo'=> $seo
         ]);
     }
 
     public function actionCompany($alias, $uforom=false, $sort=false, $sort_desc=false)
     {
-        $this->layout = "layout";
+        $this->layout = "profile";
         $company=(new Company())->getCompany($alias);
         if($company->name)
         {
             $vkauth = new VkAuth($alias, 'company');
-            $vkhref=$vkauth->getHref();
             $fbauth = new FbAuth($alias, 'company');
-            $fbhref=$fbauth->getHref();
+
 
             try {
                 if($company->vk_group) {$wall=(new Wall($company->vk_group))->getWall();}
@@ -91,7 +99,7 @@ class MainController extends MyController
 
             $model=new ReviewForm();
             $model->star=3;
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) 
+            if ($model->load(Yii::$app->request->post(), '') && $model->validate())
             {
                 if ($model->saveReview($company->id))
                 {
@@ -99,26 +107,21 @@ class MainController extends MyController
                     $model->star=3;
                 }
             }
+
             if (isset($_GET['code']) && isset($_GET['ufrom']) && $_GET['ufrom']=="vk") {
                 $userInfo=$vkauth->loginUser($_GET['code']);
                 if($userInfo)
-                    $this->redirect(['company', 'alias'=>$alias, '#'=>'add-review']);
+                    $this->redirect(['company', 'alias'=>$alias, '#'=>'addReview']);
             }
             if (isset($_GET['code']) && isset($_GET['ufrom']) && $_GET['ufrom']=="fb") {
                 $userInfo=$fbauth->loginUser($_GET['code']);
                 if($userInfo)
-                    $this->redirect(['company', 'alias'=>$alias, '#'=>'add-review']);
+                    $this->redirect(['company', 'alias'=>$alias, '#'=>'addReview']);
             }
-            if(isset($_GET['anonim']))
-            {
-                Yii::$app->user->login(User::findByUsername('anonim'));
-                $this->redirect(['company', 'alias'=>$alias,'#'=>'add-review']);
-            }
+
             return $this->render('company',
             [
                 'company'=>$company,
-                'vkhref'=>$vkhref,
-                'fbhref'=>$fbhref,
                 'userInfo'=>$userInfo,
                 'model'=>$model,
                 'sort'=>$sort,

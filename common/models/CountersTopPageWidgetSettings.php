@@ -5,7 +5,7 @@ namespace common\models;
 use common\interfaces\IWidgetSettings;
 use yii\base\Model;
 
-class CountersTopPageSettings extends Model implements IWidgetSettings
+class CountersTopPageWidgetSettings extends Model implements IWidgetSettings
 {
     public $key;
     public $title;
@@ -31,6 +31,11 @@ class CountersTopPageSettings extends Model implements IWidgetSettings
             [['first_counter', 'second_counter', 'third_counter'], 'integer'],
             [['first_title', 'second_title', 'third_title', 'key', 'title'], 'string'],
         ];
+    }
+
+    public function getView()
+    {
+        return "_counters_top_page";
     }
 
     public function initSettings($options)

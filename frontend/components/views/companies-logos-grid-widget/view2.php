@@ -4,7 +4,7 @@ use yii\helpers\Url;
 
 ?>
 
-<div class="col-xs-12 col-sm-3 col-sm-offset-1 sm-col-bottom-offset">
+<div class="col-xs-12 col-md-3 col-md-offset-1 md-col-bottom-offset">
     <ul class="rating-companies-list vertical">
         <li>
             <a href="<?= Url::toRoute([$target_url, 'alias' => $items[0]['alias']]); ?>" class="link">
@@ -18,7 +18,7 @@ use yii\helpers\Url;
 <?php
 $limit = 4;
 ?>
-<div class="col-xs-12 col-sm-7">
+<div class="col-xs-12 col-md-7">
     <ul class="rating-companies-list">
         <?php foreach ($items as $key => &$item): ?>
             <?php $next = current($items) ?>

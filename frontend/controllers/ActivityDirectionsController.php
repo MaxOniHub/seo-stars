@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\data_mappers\ActivityDirectionDataMapper;
+use common\data_mappers\CompanyDataMapper;
 use Yii;
 use common\models\ActivityDirection;
 use common\models\ActivityDirectionSearch;
@@ -16,11 +17,25 @@ use yii\filters\VerbFilter;
  */
 class ActivityDirectionsController extends Controller
 {
-
-    public $layout = "layout";
+    public $layout = "common";
 
     public function actionGetByType($slug)
     {
-       return $this->render("index");
+        /** @var CompanyDataMapper $companyDataMapper */
+        $companyDataMapper = Yii::createObject(CompanyDataMapper::class);
+        /** @var ActivityDirectionDataMapper $activityDirections */
+        $activityDirections = Yii::createObject(ActivityDirectionDataMapper::class);
+
+        /** @var ActivityDirection $activity */
+        $activity = $activityDirections->getByAlias($slug);
+
+        $result = $companyDataMapper->getCompaniesByActivity($slug);
+
+        return $this->render("index",
+            [
+                "items" => $result,
+                "activity" => $activity
+            ]
+        );
     }
 }
