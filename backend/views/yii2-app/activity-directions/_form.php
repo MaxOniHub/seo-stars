@@ -1,5 +1,6 @@
 <?php
 
+use dosamigos\ckeditor\CKEditor;
 use yii\helpers\Url;
 use kartik\color\ColorInput;
 use kartik\switchinput\SwitchInput;
@@ -37,7 +38,15 @@ use yii\widgets\ActiveForm;
         <div class="col-md-3">
             <?= $form->field($model, 'is_visible')->widget(SwitchInput::classname(), []); ?>
         </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <?= $form->field($model, 'about')->widget(CKEditor::className(), [
+                'options' => ['rows' => 6],
+                'preset' => 'full'
+            ]) ?>
+        </div>
     </div>
 
     <div class="row">

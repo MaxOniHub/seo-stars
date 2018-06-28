@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-use yii\behaviors\SluggableBehavior;
+
 
 /**
  * This is the model class for table "activity_direction".
@@ -13,6 +13,7 @@ use yii\behaviors\SluggableBehavior;
  * @property string $alias
  * @property string $hex_border_color
  * @property integer $is_visible
+ * @property string $about
  * @property string $seo_title
  * @property string $seo_keys
  * @property string $seo_desc
@@ -38,10 +39,10 @@ class ActivityDirection extends \yii\db\ActiveRecord
         return [
             [['title', 'alias'], 'required'],
             [['is_visible'], 'integer'],
-            [['title', 'alias'], 'string', 'max' => 255],
+            [['title', 'alias', 'seo_title'], 'string', 'max' => 255],
             [['hex_border_color'], 'string', 'max' => 7],
             ['activities_ids', 'safe'],
-            [['seo_title', 'seo_keys', 'seo_desc'], 'string'],
+            [['seo_keys', 'seo_desc', 'about'], 'string'],
         ];
     }
 
@@ -57,6 +58,7 @@ class ActivityDirection extends \yii\db\ActiveRecord
             'hex_border_color' => Yii::t("app", "Цвет рамки и шрифта"),
             'is_visible' => Yii::t("app", "Показать на главной странице?"),
             'activities_ids' => Yii::t("app", "Направления деятельности"),
+            'about' => Yii::t("app", "О направления деятельности"),
             'seo_title' => Yii::t("app", "SEO Заголовок"),
             'seo_keys' => Yii::t("app", "SEO Ключевые слова"),
             'seo_desc' => Yii::t("app", "SEO Описание"),
