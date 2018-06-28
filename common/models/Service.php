@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\interfaces\IBasicEntity;
 use EvgenyGavrilov\behavior\ManyToManyBehavior;
 use Yii;
 use yii\helpers\Url;
@@ -30,7 +31,7 @@ use yii\helpers\Url;
  * @property Person[] $people
  * @property Review[] $reviews0
  */
-class Service extends \yii\db\ActiveRecord
+class Service extends \yii\db\ActiveRecord implements IBasicEntity
 {
     public $activities_ids;
 
@@ -105,6 +106,27 @@ class Service extends \yii\db\ActiveRecord
             }
         }
     }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getLogo()
+    {
+        return Yii::$app->params['imgPath'] . $this->logo;
+    }
+
+    public function getRating()
+    {
+        return $this->raiting;
+    }
+
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -135,4 +157,6 @@ class Service extends \yii\db\ActiveRecord
         return $this->hasMany(ActivityDirection::className(), ['id' => 'activity_id'])
             ->viaTable('services_activities', ['service_id' => 'id']);
     }
+
+
 }

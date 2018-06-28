@@ -35,6 +35,8 @@ class ServiceController extends MyController
 
     public function actionService($alias, $uforom=false, $sort=false, $sort_desc=false)
     {
+        $this->layout = "profile";
+
         $service=Service::getService($alias);
         if($service->name)
         {
@@ -50,7 +52,7 @@ class ServiceController extends MyController
             
             $model=new ReviewForm();
             $model->star=3;
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) 
+            if ($model->load(Yii::$app->request->post(), '') && $model->validate())
             {
                 if ($model->saveServiceReview($service->id))
                 {
