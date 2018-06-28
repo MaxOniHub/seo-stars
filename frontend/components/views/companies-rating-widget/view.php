@@ -11,10 +11,11 @@
         </thead>
         <tbody>
 
-        <?php foreach ($items as $key => $item): ?>
+        <?php
+        foreach ($items as $key => $item): ?>
             <tr class="<?= $widget->getClass($item["profile_complete_status"]) ?>">
                 <td class="numb"><?= $key+1 ?></td>
-                <td class="company"><?= $item["name"] ?></td>
+                <td class="company"><?= $widget->getTargetUrl($item); ?></td>
                 <td><?= $widget->countCases($item["casesFiles"])?></td>
                 <td><?= $item["raiting"]?></td>
                 <td><?= $item["reviews"]?></td>

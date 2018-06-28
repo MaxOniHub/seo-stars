@@ -4,6 +4,7 @@ namespace frontend\components;
 
 use common\helpers\ProfileCompletionColor;
 use yii\base\Widget;
+use yii\helpers\Url;
 
 class CompaniesRatingWidget extends Widget
 {
@@ -11,6 +12,7 @@ class CompaniesRatingWidget extends Widget
 
     /** @var ProfileCompletionColor */
     private $ProfileCompletionColor;
+
 
     public function init()
     {
@@ -36,6 +38,11 @@ class CompaniesRatingWidget extends Widget
     public function countCases($cases)
     {
         return count($cases);
+    }
+
+    public function getTargetUrl($object)
+    {
+        return \yii\helpers\Html::a($object["name"],  Url::toRoute(['company', 'alias' => $object['alias']]));
     }
 
 }
