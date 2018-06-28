@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\interfaces\IBasicEntity;
 use EvgenyGavrilov\behavior\ManyToManyBehavior;
 use Yii;
 
@@ -30,7 +31,7 @@ use Yii;
  * @property Company $company
  * @property Review[] $reviews0
  */
-class Conference extends \yii\db\ActiveRecord
+class Conference extends \yii\db\ActiveRecord implements IBasicEntity
 {
     public $activities_ids;
 
@@ -94,6 +95,32 @@ class Conference extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getLogo()
+    {
+        return Yii::$app->params['imgPath'] . $this->logo;
+    }
+
+    public function getRating()
+    {
+        return $this->raiting;
+    }
+
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
+    public function isCompany()
+    {
+        return $this->company ? true : false;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -131,4 +158,5 @@ class Conference extends \yii\db\ActiveRecord
         return $this->hasMany(ActivityDirection::className(), ['id' => 'activity_id'])
             ->viaTable('conferences_activities', ['conference_id' => 'id']);
     }
+
 }

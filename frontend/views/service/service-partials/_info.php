@@ -15,10 +15,10 @@ $imgPath = Yii::$app->params['imgPath'];
                     <i class="icon icon-grid-world"></i>
                     <div class="info">
                         <div class="name">Сайт</div>
-                        <?php if($company["site_link"]==1) :?>
-                            <?= \yii\helpers\Html::a($company["site"], $company["site"], ["target" => "_blank"])?>
+                        <?php if($service["site_link"]==1) :?>
+                            <?= \yii\helpers\Html::a($service["site"], $service["site"], ["target" => "_blank"])?>
                         <?php  else: ?>
-                            <?= $company["site"]; ?>
+                            <?= $service["site"]; ?>
                         <?php endif;?>
                     </div>
                 </li>
@@ -60,6 +60,12 @@ $imgPath = Yii::$app->params['imgPath'];
             </ul>
             <div class="social-title">Соцсети:</div>
             <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $service->vk_group, "fb_group" => $service->fb_group]) ?>
+        </div>
+        <div class="col-xs-12 col-md-6 first-xs last-md">
+            <div class="image-cover">
+                <!-- img.vertical чтобы растянуть вертикальное изображение -->
+                <?= \yii\helpers\Html::img($service->getLogo(), ["alt" => $service->getName()])?>
+            </div>
         </div>
     </div>
 </div>

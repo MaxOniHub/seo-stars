@@ -10,6 +10,7 @@ use common\models\User;
 use common\models\Theme;
 use common\models\Conference;
 use common\models\Review;
+use yii\base\ErrorException;
 use yii\helpers\Json;
 use frontend\components\Wall;
 use frontend\components\WallFB;
@@ -28,6 +29,8 @@ class ConferenceController extends MyController
 
     public function actionConference($alias, $uforom=false, $sort=false, $sort_desc=false)
     {
+        $this->layout = "profile";
+
         $conference=Conference::getConference($alias);
         if($conference->name)
         {
@@ -35,12 +38,15 @@ class ConferenceController extends MyController
             $vkhref=$vkauth->getHref();
             $fbauth = new FbAuth($alias, 'conference');
             $fbhref=$fbauth->getHref();
-            if($conference->vk_group) {$wall=(new Wall($conference->vk_group))->getWall();}
-            else if($conference->fb_group && !$conference->vk_group) {$fb_wall=(new WallFB($conference->fb_group))->getWall();}
+            try {
+                if($conference->vk_group) {$wall=(new Wall($conference->vk_group))->getWall();}
+                else if($conference->fb_group && !$conference->vk_group) {$fb_wall=(new WallFB($conference->fb_group))->getWall();}
+            }catch (ErrorException $e) {}
+
             
             $model=new ReviewForm();
             $model->star=3;
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) 
+            if ($model->load(Yii::$app->request->post(), '') && $model->validate())
             {
                 if ($model->saveConferenceReview($conference->id, 'conference_id'))
                 {

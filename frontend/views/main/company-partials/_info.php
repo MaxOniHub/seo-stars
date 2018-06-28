@@ -39,7 +39,7 @@
             <i class="icon icon-star-3"></i>
             <div class="info">
                 <div class="name">Рейтинг</div>
-                <div class="value"><?= $company["raiting"]; ?></div>
+                <div class="value"><?= $company->getRating(); ?></div>
             </div>
         </li>
         <li>

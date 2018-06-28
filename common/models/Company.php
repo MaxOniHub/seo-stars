@@ -4,7 +4,9 @@ namespace common\models;
 
 use backend\behaviors\CompanyCompleteProfileBehavior;
 use backend\behaviors\CompanyRatingModifierBehavior;
+use common\interfaces\IBasicEntity;
 use EvgenyGavrilov\behavior\ManyToManyBehavior;
+use Yii;
 use yii\helpers\Url;
 
 /**
@@ -28,7 +30,7 @@ use yii\helpers\Url;
  * @property string $tel
  * @property integer $profile_complete_status
  */
-class Company extends \yii\db\ActiveRecord
+class Company extends \yii\db\ActiveRecord implements IBasicEntity
 {
     public $activities_ids;
 
@@ -123,6 +125,33 @@ class Company extends \yii\db\ActiveRecord
             'profile_complete_status' => 'Статус наполненности профиля(%)',
         ];
     }
+
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getLogo()
+    {
+        return Yii::$app->params['imgPath'] . $this->logo;
+    }
+
+    public function getRating()
+    {
+        return $this->raiting;
+    }
+
+    public function getReviews()
+    {
+       return $this->reviews;
+    }
+
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
     public function getCompany($alias)
     {
         return static::find()->where(['alias'=>$alias])->one();        
@@ -275,4 +304,5 @@ class Company extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CompanyReviewsAndThanks::className(), ['company_id' => 'id']);
     }
+
 }
