@@ -14,6 +14,7 @@ use common\models\Service;
 use common\models\Review;
 use common\models\Pages;
 use common\models\Mainpage;
+use yii\base\Exception;
 use yii\helpers\Json;
 use frontend\components\Wall;
 use frontend\components\WallFB;
@@ -41,8 +42,11 @@ class ServiceController extends MyController
             $vkhref=$vkauth->getHref();
             $fbauth = new FbAuth($alias, 'service');
             $fbhref=$fbauth->getHref();
-            if($service->vk_group) {$wall=(new Wall($service->vk_group))->getWall();}
-            else if($service->fb_group && !$service->vk_group) {$fb_wall=(new WallFB($service->fb_group))->getWall();}
+            try {
+                if($service->vk_group) {$wall=(new Wall($service->vk_group))->getWall();}
+                else if($service->fb_group && !$service->vk_group) {$fb_wall=(new WallFB($service->fb_group))->getWall();}
+            }catch (yii\base\ErrorException $e) {}
+
             
             $model=new ReviewForm();
             $model->star=3;

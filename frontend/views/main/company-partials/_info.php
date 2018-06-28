@@ -65,12 +65,6 @@
         </li>
     </ul>
     <div class="social-title">Соцсети:</div>
-    <ul class="social-list icon-larger">
-        <li>
-            <a href="<?= $company["vk_group"]?>"><i class="icon icon-vk"></i></a>
-        </li>
-        <li>
-            <a href="<?= $company["fb_group"]?>"><i class="icon icon-facebook-6"></i></a>
-        </li>
-    </ul>
+
+    <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $company["vk_group"], "fb_group" => $company["fb_group"]]) ?>
 </div>

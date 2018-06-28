@@ -2,7 +2,7 @@
     <div class="container wall">
         <hr/>
         <div class="row">
-            <h2>Новости от <?= $company["name"]; ?></h2>
+            <h2>Новости от <?= $entity["name"]; ?></h2>
             <?php
             for ($i = 1; $i < count($wall); $i++) {
                 ?>

@@ -14,6 +14,7 @@ use common\models\Person;
 use common\models\Review;
 use common\models\Pages;
 use common\models\Mainpage;
+use yii\base\ErrorException;
 use yii\helpers\Json;
 use frontend\components\Wall;
 use frontend\components\WallFB;
@@ -21,6 +22,8 @@ use frontend\components\WallFB;
 
 class PersonController extends MyController
 {
+    public $layout = "common";
+
     public function actionPersons()
     {
         $persons = Person::getAll();
@@ -32,6 +35,9 @@ class PersonController extends MyController
 
     public function actionPerson($alias, $uforom=false, $sort=false, $sort_desc=false)
     {
+
+        $this->layout = "profile";
+
         $person=Person::getperson($alias);
         if($person->name)
         {
@@ -39,11 +45,15 @@ class PersonController extends MyController
             $vkhref=$vkauth->getHref();
             $fbauth = new FbAuth($alias, 'person');
             $fbhref=$fbauth->getHref();
-            if($person->vk_group) {$wall=(new Wall($person->vk_group, true))->getUserWall();}
+
+            try {
+                if($person->vk_group) {$wall=(new Wall($person->vk_group, true))->getUserWall();}
+            }catch (ErrorException $e){}
+
 
             $model=new ReviewForm();
             $model->star=3;
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) 
+            if ($model->load(Yii::$app->request->post(), '') && $model->validate())
             {
                 if ($model->savePersonReview($person->id))
                 {
@@ -51,6 +61,7 @@ class PersonController extends MyController
                     $model->star=3;
                 }
             }
+
             if (isset($_GET['code']) && isset($_GET['ufrom']) && $_GET['ufrom']=="vk") {
                 $userInfo=$vkauth->loginUser($_GET['code']);
                 if($userInfo)

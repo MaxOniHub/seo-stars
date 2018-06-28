@@ -29,3 +29,42 @@ ul.sort li
 {
     text-decoration: none;
 }
+
+
+.company-info .company-info-list>li {
+    white-space: nowrap;
+}
+
+.company-info .company-info-list .info {
+    white-space: normal;
+}
+
+.white-popup-block
+{
+    color: #fff;
+    text-align: center;
+}
+.white-popup-block h1
+{
+    margin-bottom: 20px;
+}
+
+.white-popup-block p
+{
+    font-size: 20px;
+}
+
+.white-popup-block a
+{
+    padding: 20px;
+    font-weight: normal;
+}
+
+.white-popup-block a, .white-popup-block a:hover
+{
+    color: #ff2250;
+}
+.white-popup-block a:hover
+{
+    font-weight: bold;
+}

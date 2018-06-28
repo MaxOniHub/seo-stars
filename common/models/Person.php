@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\interfaces\IPersonEntity;
 use EvgenyGavrilov\behavior\ManyToManyBehavior;
 use Yii;
 use yii\helpers\Url;
@@ -29,7 +30,7 @@ use yii\helpers\Url;
  * @property Service $service
  * @property Review[] $reviews0
  */
-class Person extends \yii\db\ActiveRecord
+class Person extends \yii\db\ActiveRecord implements IPersonEntity
 {
     public $activities_ids;
 
@@ -66,6 +67,7 @@ class Person extends \yii\db\ActiveRecord
         ];
     }
     public $conferences_string="";
+
     public function afterFind()
     {
         if(isset($this->conferences))
@@ -103,6 +105,36 @@ class Person extends \yii\db\ActiveRecord
             'seo_desc' => 'SEO Описание',
             'activities_ids' => 'Направления деятельности',
         ];
+    }
+
+    public function getName()
+    {
+       return $this->name;
+    }
+
+    public function getLogo()
+    {
+       return Yii::$app->params['imgPath'].$this->logo;
+    }
+
+    public function getRating()
+    {
+        return $this->raiting;
+    }
+
+    public function getCompanyName()
+    {
+        return $this->company->name;
+    }
+
+    public function getServiceName()
+    {
+        return $this->service->name;
+    }
+
+    public function getAbout()
+    {
+        return $this->about;
     }
 
     /**
@@ -150,4 +182,6 @@ class Person extends \yii\db\ActiveRecord
         return $this->hasMany(ActivityDirection::className(), ['id' => 'activity_id'])
             ->viaTable('persons_activities', ['person_id' => 'id']);
     }
+
+
 }

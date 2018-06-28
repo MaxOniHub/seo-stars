@@ -5,12 +5,12 @@ namespace frontend\components;
 use yii\base\Widget;
 
 /**
- * Class CompanySocialNewsWidget
+ * Class SocialNewsWidget
  * @package frontend\components
  */
-class CompanySocialNewsWidget extends Widget
+class SocialNewsWidget extends Widget
 {
-    public $company;
+    public $entity;
 
     public $vk_wall;
 
@@ -25,7 +25,7 @@ class CompanySocialNewsWidget extends Widget
 
     public function run()
     {
-        return $this->render("company-social-news-widget/view", ["widget" => $this]);
+        return $this->render("social-news-widget/view", ["widget" => $this]);
     }
 
     public function parseStringToLink($string)

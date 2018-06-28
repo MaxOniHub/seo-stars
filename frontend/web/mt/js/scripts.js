@@ -1,3 +1,14 @@
+function callModal()
+{
+    $.magnificPopup.open({
+        items: {
+            src: '#myModal'
+        },
+        type: 'inline',
+        modal: true
+
+    });
+}
 function likecomm(id)
 {
     $.get('/main/plus', {id : id}, function(data){
@@ -5,7 +16,9 @@ function likecomm(id)
         if(data.likes!="no")
             $('.count_likes'+id).html(' '+data.likes+' ');
         else
-            $('#myModal').modal('show');
+        {
+            callModal();
+        }
    });
 }
 function dislikecomm(id)
@@ -15,9 +28,17 @@ function dislikecomm(id)
         if(data.likes!="no")
             $('.count_likes'+id).html(' '+data.likes+' ');
         else
-            $('#myModal').modal('show');
+        {
+            callModal();
+        }
    });
 }
+$(function () {
+    $(document).on('click', '.popup-modal-dismiss', function (e) {
+        e.preventDefault();
+        $.magnificPopup.close();
+    });
+});
 /*$("#my-pjax").on("pjax:end", function() {
     $.pjax.reload({container : '#my-pjax-table'});
 });*/

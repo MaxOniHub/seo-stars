@@ -35,7 +35,8 @@ class RegionsWidgetSettings extends Model implements IWidgetSettings
     {
         return [
             [['region_name1', 'region_name2', 'region_name3', 'region_name4', 'region_name5'], 'string'],
-            [['region_link1', 'region_link2', 'region_link3', 'region_link4', 'region_link5', 'key', 'title'], 'string'],
+            [['key', 'title'], 'string'],
+            [['region_link1', 'region_link2', 'region_link3', 'region_link4', 'region_link5'],'url', 'message' => "Указанное значение не является правильным URL (http(s)://example.com)."]
         ];
     }
 
@@ -68,11 +69,11 @@ class RegionsWidgetSettings extends Model implements IWidgetSettings
     {
         $attributes = $this->getAttributes(null, ["key", "title", "options"]);
         return [
-            ["region_name" => $attributes["region_name1"], "link" => $attributes["region_link1"]],
-            ["region_name" => $attributes["region_name2"], "link" => $attributes["region_link2"]],
-            ["region_name" => $attributes["region_name3"], "link" => $attributes["region_link3"]],
-            ["region_name" => $attributes["region_name4"], "link" => $attributes["region_link4"]],
-            ["region_name" => $attributes["region_name5"], "link" => $attributes["region_link5"]]
+            ["region_name" => $attributes["region_name1"], "region_link" => $attributes["region_link1"]],
+            ["region_name" => $attributes["region_name2"], "region_link" => $attributes["region_link2"]],
+            ["region_name" => $attributes["region_name3"], "region_link" => $attributes["region_link3"]],
+            ["region_name" => $attributes["region_name4"], "region_link" => $attributes["region_link4"]],
+            ["region_name" => $attributes["region_name5"], "region_link" => $attributes["region_link5"]]
         ];
 
     }
@@ -86,4 +87,5 @@ class RegionsWidgetSettings extends Model implements IWidgetSettings
     {
         return $this->title;
     }
+
 }

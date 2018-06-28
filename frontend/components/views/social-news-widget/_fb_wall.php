@@ -1,6 +1,6 @@
 <hr/>
 <div class="row">
-    <h2>Новости от <?= $company["name"]; ?></h2>
+    <h2>Новости от <?= $entity["name"]; ?></h2>
     <div class="row">
         <?php
         for ($i = 0; $i < count($wall); $i++) {

@@ -4,7 +4,7 @@
 /* @var $content string */
 
 
-\frontend\assets\TemplateV2Asset::register($this);
+\frontend\assets\ProfileAsset::register($this);
 ?>
 
 <?php $this->beginPage() ?>

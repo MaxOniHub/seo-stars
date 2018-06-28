@@ -13,7 +13,6 @@ use yii\base\Widget;
  */
 class RegionsListWidget extends Widget
 {
-
     public $items;
 
     /** @var WidgetSettingsDataMapper **/

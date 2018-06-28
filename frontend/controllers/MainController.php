@@ -82,6 +82,7 @@ class MainController extends MyController
     public function actionCompany($alias, $uforom=false, $sort=false, $sort_desc=false)
     {
         $this->layout = "profile";
+
         $company=(new Company())->getCompany($alias);
         if($company->name)
         {
