@@ -30,7 +30,8 @@
         "evgeny-gavrilov/yii2-many-to-many": "^1.1",
         "kartik-v/yii2-widget-fileinput": "@dev",
         "claviska/simpleimage": "^3.3",
-        "kartik-v/yii2-widget-touchspin": "*"
+        "kartik-v/yii2-widget-touchspin": "*",
+        "purrweb/yii2-heroku": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
