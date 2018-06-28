@@ -28,6 +28,7 @@ use yii\helpers\Url;
  * @property string $about
  * @property string $e-mail
  * @property string $tel
+ * @property string $multiplier
  * @property integer $profile_complete_status
  */
 class Company extends \yii\db\ActiveRecord implements IBasicEntity
@@ -87,6 +88,7 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
             [['tags', 'regions'], 'safe'],
             [['name', 'alias', 'site', 'vk_group', 'fb_group', 'tel', 'year'], 'string', 'max' => 255],
             ['email', 'email'],
+            [['multiplier'], 'number'],
             [['activities_ids', 'cases', 'reviews_and_thanks'], 'safe'],
             ['logo','file','skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'checkExtensionByMimeType'=>false]
         ];
@@ -123,6 +125,7 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
             'cases' => 'Кейсы',
             'reviews_and_thanks' => 'Отзывы и благодарности клиентов',
             'profile_complete_status' => 'Статус наполненности профиля(%)',
+            'multiplier' => 'Мультипликатор',
         ];
     }
 

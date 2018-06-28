@@ -21,26 +21,40 @@ use common\models\Region;
 
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <?= \frontend\components\ProfileCompleteStatusBarWidget::widget(["percents" => $model->profile_complete_status, "caption" => "Профиль заполнен на "])?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="row">
-            <div class="col-md-6">
-                <?=
-                $form->field($model, 'raiting')->widget(TouchSpin::classname(), [
-                    'options'=>['placeholder'=>'Enter rating 1 to 5...'],
-                    'pluginOptions' => [
-                        'verticalbuttons' => true,
-                        'verticalupclass' => 'glyphicon glyphicon-plus',
-                        'verticaldownclass' => 'glyphicon glyphicon-minus',
-                    ]
-                ]);
-                ?>
-            </div>
-            <div class="col-md-6">
-                <?= $form->field($model, 'profile_complete_status')->textInput(['maxlength' => true, "disabled" => true]) ?>
-            </div>
+                <div class="col-md-4">
+                    <?=
+                    $form->field($model, 'raiting')->widget(TouchSpin::classname(), [
+                        'options'=>['placeholder'=>'Введите рейтинг'],
+                        'pluginOptions' => [
+                            'verticalbuttons' => true,
+                            'verticalupclass' => 'glyphicon glyphicon-plus',
+                            'verticaldownclass' => 'glyphicon glyphicon-minus',
+                        ]
+                    ]);
+                    ?>
+                </div>
+                <div class="col-md-4">
+                    <?= $form->field($model, 'profile_complete_status')->textInput(['maxlength' => true, "disabled" => true]) ?>
+                </div>
+                <div class="col-md-4">
+                    <?= $form->field($model, 'multiplier')->widget(TouchSpin::classname(), [
+                        'options'=>['placeholder'=>'Введите мультипликатор'],
+                        'pluginOptions' => [
+                            'initval' => 1.00,
+                            'decimals' => 2,
+                            'step' => 0.5,
+                            'verticalbuttons' => true,
+                            'verticalupclass' => 'glyphicon glyphicon-plus',
+                            'verticaldownclass' => 'glyphicon glyphicon-minus',
+                        ]
+                    ]);
+                    ?>
+                </div>
             </div>
 
 
