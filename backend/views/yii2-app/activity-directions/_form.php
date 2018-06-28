@@ -40,25 +40,43 @@ use yii\widgets\ActiveForm;
 
     </div>
 
+    <div class="row">
 
+        <div class="col-md-6">
+            <?= $form->field($model, 'seo_title')->textInput() ?>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'seo_keys')->textInput() ?>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'seo_desc')->textarea() ?>
+        </div>
+    </div>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
-</div>
+    </div>
 
-<?php
-$url2 = Url::toRoute(["/slug-translator/get-slug"]);
-?>
-<script>
+    <?php
+    $url2 = Url::toRoute(["/slug-translator/get-slug"]);
+    ?>
+    <script>
 
-    $('#activitydirection-title').change(function(){
-        var name = $(this).val();
-        $.get("<?= $url2 ?>", {slug : name}, function(data){
-            data = $.parseJSON(data);
-            $('#activitydirection-alias').attr("value", data.alias);
+        $('#activitydirection-title').change(function () {
+            var name = $(this).val();
+            $.get("<?= $url2 ?>", {slug: name}, function (data) {
+                data = $.parseJSON(data);
+                $('#activitydirection-alias').attr("value", data.alias);
+            });
         });
-    });
-</script>
+    </script>
