@@ -68,3 +68,9 @@ ul.sort li
 {
     font-weight: bold;
 }
+
+.social-list
+{
+    top: 10px !important;
+}
+
