@@ -32,7 +32,6 @@
                     </div>
                 </div>
             </div>
-            <hr/>
         <?php } ?>
     </div>
 </div>
