@@ -35,24 +35,24 @@ class CompanyCompleteProfileBehavior extends AttributeBehavior
     }
 
 
-    private function checkProfileComplete()
+    public function checkProfileComplete()
     {
         $this->isFilledCasesReviews();
         $this->isFilledClients();
         $this->isFilledAboutCompany();
     }
 
-    private function getCounter()
+    public function getCounter()
     {
         return $this->profile_complete_counter;
     }
 
-    private function increaseCounter($value)
+    public function increaseCounter($value)
     {
         $this->profile_complete_counter += $value;
     }
 
-    private function decreaseCounter($value)
+    public function decreaseCounter($value)
     {
         $this->profile_complete_counter -= $value;
         if ($this->profile_complete_counter < self::START_VALUE) {
@@ -60,7 +60,7 @@ class CompanyCompleteProfileBehavior extends AttributeBehavior
         }
     }
 
-    private function isFilledCasesReviews()
+    public function isFilledCasesReviews()
     {
         if (count($this->owner->casesFiles) > 0 || count($this->owner->reviewsAndThanksFiles) > 0) {
             $this->increaseCounter($this->step);
@@ -69,14 +69,14 @@ class CompanyCompleteProfileBehavior extends AttributeBehavior
         }
     }
 
-    private function isFilledClients()
+    public function isFilledClients()
     {
         if (!empty($this->owner->clients)) {
             $this->increaseCounter($this->step);
         }
     }
 
-    private function isFilledAboutCompany()
+    public function isFilledAboutCompany()
     {
         if (!empty($this->owner->about)) {
             $this->increaseCounter($this->step);

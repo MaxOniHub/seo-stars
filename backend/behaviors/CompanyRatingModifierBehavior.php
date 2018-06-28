@@ -2,6 +2,7 @@
 
 namespace backend\behaviors;
 
+use backend\helpers\ProfileRatingCounter;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
 
@@ -22,19 +23,31 @@ class CompanyRatingModifierBehavior extends AttributeBehavior
 
     public function beforeSave($event)
     {
-      //  $this->calculateRating();
-
-        $this->owner->updateAttributes(["raiting" => $this->getRating()]);
+        if ($this->canUpdateRating()) {
+            $updated_rating = $this->calculateRating();
+            $this->owner->updateAttributes(["raiting" => $updated_rating]);
+        }
     }
 
-    private function getRating()
+    private function canUpdateRating()
     {
-        return $this->owner->raiting;
+        /** @var ActiveRecord $owner */
+        $owner = $this->owner;
+        $old_attr = $owner->getOldAttributes();
+
+        if ($old_attr["about"] != $owner->about || $old_attr["clients"] != $owner->clients ||
+            count($this->owner->reviews_and_thanks) > 0 || count($this->owner->cases) > 0) {
+            return true;
+        }
+
+        return false;
+
     }
 
     private function calculateRating()
     {
-        $this->owner->raiting *= $this->owner->profile_complete_status * 0.01;
+
+        return (new ProfileRatingCounter($this->owner->profile_complete_status, $this->owner->raiting,   $this->owner->multiplier, $this->owner->reviews))->calculate();
     }
 
 }
