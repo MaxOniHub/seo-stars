@@ -74,3 +74,8 @@ ul.sort li
     top: 10px !important;
 }
 
+.company-clients>li.violet span
+{
+    color: #28185d;
+    font-size: 16px;
+}
