@@ -1,4 +1,7 @@
-<?php if (!empty($company["about"]) || ($videos = $company->getYoutubeVideoIds())):?>
+<?php
+$videos = $company->getYoutubeVideoIds();
+?>
+<?php if (!empty($company["about"]) || $videos):?>
     <div class="paragraph section-subtitle small top-offset align-left md-align-center">О компании</div>
 
 <?php endif;?>
