@@ -105,7 +105,7 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
             'alias' => 'name-url',
             'site' => 'Сайт',
             'site_link'=>'Активировать ссылку на сайт',
-            'videos'=>'Видео с ютуба ( через ## каждое)',
+            'videos'=>'Видео с ютуба',
             'raiting' => 'Рейтинг',
             'reviews' => 'Отзывы',
             'clients' => 'Клиенты',
@@ -153,6 +153,13 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
     public function getAbout()
     {
         return $this->about;
+    }
+
+    public function getYoutubeVideoIds()
+    {
+        $videos = array_filter(explode(",", $this->videos));
+
+        return !empty($videos) ? $videos : false;
     }
 
     public function getCompany($alias)

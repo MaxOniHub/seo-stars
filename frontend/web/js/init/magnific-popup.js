@@ -1,5 +1,5 @@
-if ($('.about-person-carousel').length > 0) {
-  $('.about-person-carousel').magnificPopup({
+if ($('.video-carousel').length > 0) {
+  $('.video-carousel').magnificPopup({
     delegate: 'a',
     type: 'iframe'
   });

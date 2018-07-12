@@ -93,13 +93,13 @@ use common\models\Region;
 
     </div>
 
-
-    <?= $form->field($model, 'videos')->textArea(['rows' => 4]) ?>
-
-    <?php //$form->field($model, 'raiting')->textInput() ?>
-
-    <?php //$form->field($model, 'reviews')->textInput() ?>
-
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'videos')->textArea(['rows' => 4]) ?>
+            <i> Укажите ID видео или несколько ID через <code>`,`</code></i>
+        </div>
+    </div>
+    <br>
     <div class="row">
         <div class="col-md-6">
             <?= $form->field($model, 'clients')->textarea() ?>

@@ -34,12 +34,7 @@ $this->registerMetaTag([
     <?= \frontend\components\CompanyImageCarouselWidget::widget(["items" => $company["reviewsAndThanksFiles"]])?>
 <?php endif; ?>
 
-<?php if (!empty($company["about"])):?>
-    <div class="section-subtitle small top-offset align-left md-align-center">О компании</div>
-    <div class="paragraph vertical-offset align-left md-align-center">
-        <?= $company["about"]?>
-    </div>
-<?php endif; ?>
+<?= $this->render("company-partials/_about", ["company" => $company]) ?>
 
 <?= $this->render("company-partials/_reviews", [
         "model" => $model,
