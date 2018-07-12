@@ -53,19 +53,7 @@ $("#my-pjax").on("pjax:start", function() {
     $("#add-review button").attr('disabled',true);
 
 });
-$("#my-pjax").on("pjax:end", function() {
-    $('#add-review button').html('Добавить');
-    $("#add-review button").removeAttr('disabled');
-    tops = $("#sortreviews").offset().top;
-    $("body,html").animate({scrollTop: tops-15}, 10);
-    var urlgr='/'+$('#pjax-table').attr('data-gisp')+'/getraiting';
-    $.get(urlgr, {id : $('#tablerait').attr('data-id')}, function(data){
-        var data= $.parseJSON(data);
-        console.log(data);
-        $('#tablerait').text(data.raiting);
-        $('#tablerev').text(data.reviews);
-   });
-});
+
 $('.open_table1').on('click', function(){
    $('.table1').css('display', 'block'); 
    $('.table2').css('display', 'none'); 

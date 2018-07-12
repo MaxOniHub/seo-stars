@@ -8,13 +8,15 @@ use yii\base\Widget;
  * Class ReviewsSortControlsWidget
  * @package frontend\components
  */
-class ReviewsSortControlsWidget extends Widget
+class ReviewsWidget extends Widget
 {
     public $gist;
 
-    public $entity_id;
+    public $entity_name;
 
-    public $target_url = '/review-sorting/index';
+    public $comments;
+
+    public $entity_id;
 
     public $sort;
 
@@ -22,12 +24,13 @@ class ReviewsSortControlsWidget extends Widget
 
     public function run()
     {
-        return $this->render("review-sort-control-widget/view", [
+        return $this->render("reviews-widget/view", [
             "gist" => $this->gist,
             "entity_id" => $this->entity_id,
-            "target_url" => $this->target_url,
+            "entity_name" => $this->entity_name,
             "sort" => $this->sort,
-            "sort_desc" => $this->sort_desc
+            "sort_desc" => $this->sort_desc,
+            "comments" => $this->comments
         ]);
     }
 

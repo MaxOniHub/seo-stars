@@ -24,6 +24,7 @@ class UserReviewsWidget extends Widget
 
     public function run()
     {
+
         return $this->render("user-reviews-widget/view", ["items" => $this->items, "widget" => $this]);
     }
 

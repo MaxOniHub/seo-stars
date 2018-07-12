@@ -18,7 +18,8 @@ class ProfileAsset extends AssetBundle
         'mt/js/slick.min.js',
         'mt/js/myslick.js',
         'mt/js/scripts.js',
-        'js/init/rating.js'
+        'js/init/rating.js',
+        'js/review-controls.js'
     ];
 
     public $depends = [

@@ -79,7 +79,7 @@ class MainController extends MyController
         ]);
     }
 
-    public function actionCompany($alias, $uforom=false, $sort=false, $sort_desc=false)
+    public function actionCompany($alias, $uforom=false)
     {
         $this->layout = "profile";
 
@@ -125,13 +125,11 @@ class MainController extends MyController
                 'company'=>$company,
                 'userInfo'=>$userInfo,
                 'model'=>$model,
-                'sort'=>$sort,
-                'sort_desc'=>$sort_desc,
                 'alias'=>$alias,
                 'wall'=>$wall,
                 'fb_wall'=>$fb_wall,
                 'wall_cach'=>Theme::find()->select('wall_cach')->where(['id'=>1])->one(),
-                'comments'=>Review::getAllComments($company->id, 'company_id', $sort, $sort_desc)
+                'comments'=>Review::getAllComments($company->id, 'company_id', false, false)
             ]);
         }
         else $this->redirect(['index']);
