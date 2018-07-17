@@ -17,7 +17,7 @@ $this->registerMetaTag([
 <?= $this->render("company-partials/_info", ["company" => $company])?>
 
 <div class="section-subtitle small top-offset-larger bottom-offset align-left md-align-center">Специализация</div>
-<?= \frontend\components\PopularActivityDirectionsWidget::widget(["items" => $company["activities"]])?>
+<?= \frontend\components\CompanyActivityDirectionsWidget::widget(["items" => $company["activities"]])?>
 
 <?php if (!empty($company["clients"])):?>
     <div class="section-subtitle small top-offset bottom-offset align-left md-align-center">Среди клиентов компании</div>

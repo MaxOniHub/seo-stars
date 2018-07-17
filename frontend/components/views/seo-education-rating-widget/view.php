@@ -9,6 +9,7 @@ use yii\helpers\Url;
         <tr>
             <th>Место</th>
             <th>Название</th>
+            <th>Теги</th>
             <th>Рейтинг</th>
             <th>Отзывы</th>
         </tr>

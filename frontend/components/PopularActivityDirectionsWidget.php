@@ -23,7 +23,7 @@ class PopularActivityDirectionsWidget extends Widget
     public $items;
 
     /** @var ActivityDirectionDataMapper **/
-    private $ActivityDirectionDataMapper;
+    protected $ActivityDirectionDataMapper;
 
     public function init()
     {
@@ -39,12 +39,12 @@ class PopularActivityDirectionsWidget extends Widget
         return $this->render("popular-activity-directions-widget/".$this->getTemplateName(), ["items" => $this->items]);
     }
 
-    private function getTemplateName()
+    protected function getTemplateName()
     {
         return $this->template == self::basic_type ? self::basic_view_name : self::vertical_view_name;
     }
 
-    private function loadData()
+    protected function loadData()
     {
         if (empty($this->items))
             $this->items = $this->ActivityDirectionDataMapper->getReadyToViewActivities();
