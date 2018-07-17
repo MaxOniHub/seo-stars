@@ -48,6 +48,7 @@ class MainController extends MyController
     public function actionPages()
     {
         $pages=(new Pages())->getAll();
+
         return $this->render('pages',[
             'seo'=>Theme::findOne(['id'=>1]),
             'pages'=>$pages
