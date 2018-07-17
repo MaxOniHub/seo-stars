@@ -84,17 +84,16 @@ class MainController extends MyController
         $this->layout = "profile";
 
         $company=(new Company())->getCompany($alias);
+
         if($company->name)
         {
-            $vkauth = new VkAuth($alias, 'company');
             $fbauth = new FbAuth($alias, 'company');
 
-
             try {
-                if($company->vk_group) {$wall=(new Wall($company->vk_group))->getWall();}
-                else if($company->fb_group && !$company->vk_group) {$fb_wall=(new WallFB($company->fb_group))->getWall();}
-            }catch (yii\base\ErrorException $e)
-            {
+                if ($company->fb_group) {
+                    $fb_wall = (new WallFB($company->fb_group))->getWall();
+                }
+            } catch (yii\base\ErrorException $e) {
 
             }
 

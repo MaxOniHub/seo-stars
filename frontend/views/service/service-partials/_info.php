@@ -61,12 +61,6 @@ $imgPath = Yii::$app->params['imgPath'];
                 <div class="social-title">Соцсети:</div>
                 <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $service->vk_group, "fb_group" => $service->fb_group]) ?>
             </div>
-            <div class="col-xs-12 col-md-6 first-xs last-md">
-                <div class="image-cover">
-                    <!-- img.vertical чтобы растянуть вертикальное изображение -->
-                    <?= \yii\helpers\Html::img($service->getLogo(), ["alt" => $service->getName()]) ?>
-                </div>
-            </div>
         </div>
     </div>
 

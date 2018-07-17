@@ -44,12 +44,15 @@ class ServiceController extends MyController
             $vkhref=$vkauth->getHref();
             $fbauth = new FbAuth($alias, 'service');
             $fbhref=$fbauth->getHref();
-            try {
-                if($service->vk_group) {$wall=(new Wall($service->vk_group))->getWall();}
-                else if($service->fb_group && !$service->vk_group) {$fb_wall=(new WallFB($service->fb_group))->getWall();}
-            }catch (yii\base\ErrorException $e) {}
 
-            
+            try {
+                if ($service->fb_group) {
+                    $fb_wall = (new WallFB($service->fb_group))->getWall();
+                }
+            } catch (yii\base\ErrorException $e) {
+
+            }
+
             $model=new ReviewForm();
             $model->star=3;
             if ($model->load(Yii::$app->request->post(), '') && $model->validate())
@@ -85,7 +88,7 @@ class ServiceController extends MyController
                 'sort'=>$sort,
                 'sort_desc'=>$sort_desc,
                 'alias'=>$alias,
-                'wall'=>$wall,
+                'wall'=>null,
                 'fb_wall'=>$fb_wall,
                 'wall_cach'=>Theme::find()->select('wall_cach')->where(['id'=>1])->one(),
                 'comments'=>Review::getAllComments($service->id, 'service_id', $sort, $sort_desc)

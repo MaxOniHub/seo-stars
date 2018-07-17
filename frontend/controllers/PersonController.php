@@ -47,8 +47,12 @@ class PersonController extends MyController
             $fbhref=$fbauth->getHref();
 
             try {
-                if($person->vk_group) {$wall=(new Wall($person->vk_group, true))->getUserWall();}
-            }catch (ErrorException $e){}
+                if ($person->fb_group) {
+                    $fb_wall = (new WallFB($person->fb_group))->getWall();
+                }
+            } catch (yii\base\ErrorException $e) {
+
+            }
 
 
             $model=new ReviewForm();
@@ -87,7 +91,7 @@ class PersonController extends MyController
                 'sort'=>$sort,
                 'sort_desc'=>$sort_desc,
                 'alias'=>$alias,
-                'wall'=>$wall,
+                'fb_wall'=>$fb_wall,
                 'wall_cach'=>Theme::find()->select('wall_cach')->where(['id'=>1])->one(),
                 'comments'=>Review::getAllComments($person->id, 'person_id', $sort, $sort_desc)
             ]);

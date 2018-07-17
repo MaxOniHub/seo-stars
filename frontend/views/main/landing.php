@@ -1,3 +1,19 @@
+<?php
+
+$theme = Yii::$app->theme->getSettings();
+$this->title = $theme->main_title;
+
+$this->registerMetaTag([
+    'name'=>'description',
+    'content'=>$theme->main_desc
+]);
+$this->registerMetaTag([
+    'name'=>'keywords',
+    'content'=>$theme->main_keys
+]);
+
+?>
+
 <section class="main-banner">
     <?= $this->render("landing-partials/_main_banner", ["widgetSettings" => $widgetSettings]) ?>
 </section>

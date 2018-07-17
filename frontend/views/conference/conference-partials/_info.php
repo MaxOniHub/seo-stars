@@ -80,12 +80,7 @@ $imgPath = Yii::$app->params['imgPath'];
                     <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $conference->vk_group, "fb_group" => $conference->fb_group]) ?>
                 <?php endif;?>
             </div>
-            <div class="col-xs-12 col-md-6 first-xs last-md">
-                <div class="image-cover">
-                    <!-- img.vertical чтобы растянуть вертикальное изображение -->
-                    <?= \yii\helpers\Html::img($conference->getLogo(), ["alt" => $conference->getName()]) ?>
-                </div>
-            </div>
+
         </div>
 
     </div>
