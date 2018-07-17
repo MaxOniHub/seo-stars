@@ -4,6 +4,7 @@ namespace frontend\components;
 
 use common\data_mappers\WidgetSettingsDataMapper;
 use common\helpers\WidgetsNamesHolder;
+use common\models\WidgetsSettings;
 use Yii;
 use yii\base\Widget;
 
@@ -22,7 +23,7 @@ class RegionsListWidget extends Widget
     {
         parent::init();
 
-        $this->WidgetSettingsDataMapper = Yii::createObject(WidgetSettingsDataMapper::class);
+        $this->WidgetSettingsDataMapper = new WidgetSettingsDataMapper(new WidgetsSettings());
     }
 
     public function run()

@@ -17,7 +17,7 @@ class CompanyLastReviewsWidget extends Widget
     {
         parent::init();
 
-        $this->ReviewColorProvider = \Yii::createObject(ReviewColorProvider::class);
+        $this->ReviewColorProvider = new ReviewColorProvider();
     }
 
     public function run()

@@ -4,11 +4,14 @@
 namespace common\managers;
 
 use common\data_mappers\ActivityDirectionDataMapper;
+use common\data_mappers\WidgetSettingsDataMapper;
+use common\helpers\WidgetsNamesHolder;
 use common\models\Company;
 use common\models\CompanyRatings;
 use common\models\Mainpage;
 use common\models\Review;
 use common\models\Theme;
+use common\models\WidgetsSettings;
 use Yii;
 
 /**
@@ -40,11 +43,12 @@ class LandingContentProvider
      */
     public function __construct()
     {
-        $this->Company = \Yii::createObject(Company::class);
-        $this->MainPageSettings = \Yii::createObject(Mainpage::class);
-        $this->Review = Yii::createObject(Review::class);
-        $this->ThemeSettings = Yii::createObject(Theme::class);
-        $this->WidgetsSettingsProviderManager = Yii::createObject(WidgetSettingsProvider::class);
+        $this->Company = new Company();
+        $this->MainPageSettings = new Mainpage();
+        $this->Review = new Review();
+        $this->ThemeSettings = new Theme();
+        // PLEASE use php version 5.6 and just use Yii::createObject(WidgetSettingsProvider::class) !!!!
+        $this->WidgetsSettingsProviderManager = new WidgetSettingsProvider(new WidgetSettingsDataMapper(new WidgetsSettings()), new WidgetsNamesHolder());
     }
 
     /**
@@ -62,7 +66,7 @@ class LandingContentProvider
     public function getCompanyRatings()
     {
         $mainPageSettings = $this->MainPageSettings->findOne(["id" => 1]);
-        return Yii::createObject(CompanyRatings::class, [$this->Company, $mainPageSettings]);
+        return new CompanyRatings($this->Company, $mainPageSettings);
     }
 
     /**

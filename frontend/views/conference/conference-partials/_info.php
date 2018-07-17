@@ -75,8 +75,10 @@ $imgPath = Yii::$app->params['imgPath'];
                         </div>
                     </li>
                 </ul>
-                <div class="social-title">Соцсети:</div>
-                <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $conference->vk_group, "fb_group" => $conference->fb_group]) ?>
+                <?php if ($conference->vk_group || $conference->fb_group): ?>
+                    <div class="social-title">Соцсети:</div>
+                    <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $conference->vk_group, "fb_group" => $conference->fb_group]) ?>
+                <?php endif;?>
             </div>
             <div class="col-xs-12 col-md-6 first-xs last-md">
                 <div class="image-cover">
@@ -88,9 +90,9 @@ $imgPath = Yii::$app->params['imgPath'];
 
     </div>
 
-<?php if (!empty($conference->getAbout())) : ?>
+<?php if (!empty($conference['about'])) : ?>
     <div class="section-subtitle small top-offset bottom-offset align-left md-align-center">О сервисе</div>
     <div class="about-person-carousel owl-carousel owl-loaded owl-drag">
-        <?= $conference->getAbout(); ?>
+        <?= $conference['about']; ?>
     </div>
 <?php endif; ?>

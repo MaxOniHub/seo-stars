@@ -16,8 +16,6 @@
     <?= $this->render("partials/_top_site_bar"); ?>
 
     <main>
-
-
         <section class="section bg-stars-3">
             <div class="container">
                 <div class="row">

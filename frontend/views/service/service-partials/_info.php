@@ -70,9 +70,9 @@ $imgPath = Yii::$app->params['imgPath'];
         </div>
     </div>
 
-<?php if (!empty($service->getAbout())): ?>
+<?php if (!empty($service['about'])): ?>
     <div class="section-subtitle small top-offset bottom-offset align-left md-align-center">О сервисе</div>
     <div class="about-person-carousel owl-carousel owl-loaded owl-drag">
-        <?= $service->getAbout(); ?>
+        <?= $service['about']; ?>
     </div>
 <?php endif; ?>

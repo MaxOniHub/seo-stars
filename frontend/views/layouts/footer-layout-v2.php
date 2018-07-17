@@ -1,41 +1,38 @@
+<?php
+use yii\helpers\Url;
+
+?>
 <footer class="main-footer">
     <div class="container">
         <div class="row center-xs start-ms">
             <div class="col-xs-12 col-ms-2 col-ms-offset-1">
-                <a href="#" class="logo-footer">
-                    <img src="<?= \yii\helpers\Url::to("/img/logo-footer.png")?>" alt="Seo-stars">
+                <a href="<?=Url::toRoute(['main/index']);?>" class="logo-footer">
+                    <img src="<?=\yii\helpers\Url::to("/img/logo-footer.png")?>" alt="Seo-stars">
                 </a>
             </div>
             <div class="col-xs-12 col-ms-3 col-sm-2">
                 <ul class="footer-menu">
                     <li>
-                        <a href="#">Главная</a>
+                        <a href="<?=Url::toRoute(['main/index']);?>">Главная</a>
                     </li>
                     <li>
-                        <a href="#">Карта сайта</a>
+                        <a href="<?=Url::toRoute(['main/pages']);?>">Карта сайта</a>
                     </li>
                     <li>
-                        <a href="#">Контакты</a>
+                        <a href="<?= Url::toRoute(['main/contact']);?>">Контакты</a>
                     </li>
                     <li>
-                        <a href="#">О сайте</a>
+                        <a href="<?=Url::toRoute(['main/about']);?>">О сайте</a>
                     </li>
                 </ul>
             </div>
-            <div class="col-xs-12 col-ms-3">
-                <ul class="footer-menu">
-                    <li>
-                        <a href="#">Рейтинг России</a>
-                    </li>
-                    <li>
-                        <a href="#">Рейтинг Украины</a>
-                    </li>
-                </ul>
+            <div class="col-xs-12 col-ms-3 footer-menu">
+                <?= Yii::$app->theme->getFooterLinks();?>
             </div>
             <div class="col-xs-12 col-ms-2">
                 <ul class="social-list">
                     <li>
-                        <a href="#"><i class="icon icon-facebook-6"></i></a>
+                        <a href="https://www.facebook.com/SEO-Stars-TOP-336355266796266/"><i class="icon icon-facebook-6"></i></a>
                     </li>
                     <li>
                         <a href="#"><i class="icon icon-youtube-2"></i></a>

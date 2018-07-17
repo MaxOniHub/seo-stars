@@ -3,6 +3,7 @@
 namespace frontend\components;
 
 use common\data_mappers\ActivityDirectionDataMapper;
+use common\models\ActivityDirection;
 use Yii;
 use yii\base\Widget;
 
@@ -29,7 +30,7 @@ class PopularActivityDirectionsWidget extends Widget
     {
         parent::init();
 
-        $this->ActivityDirectionDataMapper = Yii::createObject(ActivityDirectionDataMapper::class);
+        $this->ActivityDirectionDataMapper = new ActivityDirectionDataMapper(new ActivityDirection());
     }
 
     public function run()

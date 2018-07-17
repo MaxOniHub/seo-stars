@@ -35,7 +35,7 @@ class MainController extends MyController
         $this->layout = "landing";
 
         /** @var LandingContentProvider $LandingContentProvider */
-        $LandingContentProvider = Yii::createObject(LandingContentProvider::class);
+        $LandingContentProvider = new LandingContentProvider();
 
         return $this->render('landing', [
             'reviews' => $LandingContentProvider->getReviews(),
@@ -69,7 +69,7 @@ class MainController extends MyController
     public function actionRaiting()
     {
         /** @var CompanyDataMapper $companyDataMapper */
-        $companyDataMapper = Yii::createObject(CompanyDataMapper::class);
+        $companyDataMapper = new CompanyDataMapper(new Company());
         $companies = $companyDataMapper->getAll();
         $seo = Theme::findOne(['id'=>1]);
 

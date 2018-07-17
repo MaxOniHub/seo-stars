@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\EntityForm;
+use common\models\ActivityDirection;
 use Yii;
 use common\models\Conference;
 use common\models\ConferenceSearch;
@@ -73,7 +74,7 @@ class ConferenceController extends Controller
     {
         $model = new Conference();
         /** @var EntityForm $EntityForm */
-        $EntityForm = Yii::createObject(EntityForm::class);
+        $EntityForm = new EntityForm(new ActivityDirection());
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -118,7 +119,7 @@ class ConferenceController extends Controller
     {
         $model = $this->findModel($id);
         /** @var EntityForm $EntityForm */
-        $EntityForm = Yii::createObject(EntityForm::class);
+        $EntityForm = new EntityForm(new ActivityDirection());
 
         $model->tags=explode(", ", $model->tags);
         $model->regions=explode(", ", $model->regions);

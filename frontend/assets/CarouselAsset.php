@@ -22,8 +22,8 @@ class CarouselAsset extends AssetBundle
         "css/slimbox2.css"
     ];
     public $js = [
-        'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js',
-        'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js',
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
         'js/slimbox2.js'
     ];
 

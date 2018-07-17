@@ -16,7 +16,7 @@ class CompaniesRatingWidget extends Widget
 
     public function init()
     {
-        $this->ProfileCompletionColor = \Yii::createObject(ProfileCompletionColor::class);
+        $this->ProfileCompletionColor = new ProfileCompletionColor();
         parent::init();
     }
 

@@ -8,8 +8,10 @@ use claviska\SimpleImage;
 use common\data_mappers\CompanyCasesDataMapper;
 use common\data_mappers\CompanyReviewsAndThanksDataMapper;
 use common\managers\FileUploaderManager;
+use common\models\ActivityDirection;
 use common\models\CompanyActivities;
 use common\models\CompanyCases;
+use common\models\CompanyReviewsAndThanks;
 use Yii;
 use common\models\Company;
 use common\models\CompanySearch;
@@ -101,7 +103,7 @@ class CompanyController extends Controller
     {
         $model = new Company();
         /** @var EntityForm $EntityForm */
-        $EntityForm = Yii::createObject(EntityForm::class);
+        $EntityForm = new EntityForm(new ActivityDirection());
 
         if ($model->load(Yii::$app->request->post()))
         {
@@ -122,9 +124,9 @@ class CompanyController extends Controller
             if ($model->cases = UploadedFile::getInstances($model, 'cases'))
             {
                 /** @var FileUploaderManager $FileUploaderManager */
-                $FileUploaderManager = Yii::createObject(FileUploaderManager::class);
+                $FileUploaderManager = new FileUploaderManager(new SimpleImage());
                 /** @var CompanyCasesDataMapper $CompanyCasesDataMapper */
-                $CompanyCasesDataMapper = Yii::createObject(CompanyCasesDataMapper::class, [Yii::$app->db]);
+                $CompanyCasesDataMapper = new CompanyCasesDataMapper(Yii::$app->db, new CompanyCases());
 
                 $links = $FileUploaderManager
                     ->setFileNamePattern("case")
@@ -141,9 +143,9 @@ class CompanyController extends Controller
             if ($model->reviews_and_thanks = UploadedFile::getInstances($model, 'reviews_and_thanks'))
             {
                 /** @var FileUploaderManager $FileUploaderManager */
-                $FileUploaderManager = Yii::createObject(FileUploaderManager::class);
+                $FileUploaderManager = new FileUploaderManager(new SimpleImage());
                 /** @var CompanyReviewsAndThanksDataMapper $CompanyCasesDataMapper */
-                $CompanyReviewsAndThanksDataMapper = Yii::createObject(CompanyReviewsAndThanksDataMapper::class, [Yii::$app->db]);
+                $CompanyReviewsAndThanksDataMapper = new CompanyReviewsAndThanksDataMapper(Yii::$app->db, new CompanyReviewsAndThanks());
 
                 $links = $FileUploaderManager
                     ->setFileNamePattern("reviews")
@@ -184,7 +186,7 @@ class CompanyController extends Controller
     public function actionUpdate($id)
     {
         /** @var EntityForm $EntityForm */
-        $EntityForm = Yii::createObject(EntityForm::class);
+        $EntityForm = new EntityForm(new ActivityDirection());
 
         $model = $this->findModel($id);
         $model->tags=explode(", ", $model->tags);
@@ -216,9 +218,9 @@ class CompanyController extends Controller
             if ($model->cases = UploadedFile::getInstances($model, 'cases'))
             {
                 /** @var FileUploaderManager $FileUploaderManager */
-                $FileUploaderManager = Yii::createObject(FileUploaderManager::class);
+                $FileUploaderManager = new FileUploaderManager(new SimpleImage());
                 /** @var CompanyCasesDataMapper $CompanyCasesDataMapper */
-                $CompanyCasesDataMapper = Yii::createObject(CompanyCasesDataMapper::class, [Yii::$app->db]);
+                $CompanyCasesDataMapper = new CompanyCasesDataMapper(Yii::$app->db, new CompanyCases());
 
                 $links = $FileUploaderManager
                    ->setFileNamePattern("case")
@@ -235,9 +237,9 @@ class CompanyController extends Controller
             if ($model->reviews_and_thanks = UploadedFile::getInstances($model, 'reviews_and_thanks'))
             {
                 /** @var FileUploaderManager $FileUploaderManager */
-                $FileUploaderManager = Yii::createObject(FileUploaderManager::class);
+                $FileUploaderManager = new FileUploaderManager(new SimpleImage());
                 /** @var CompanyReviewsAndThanksDataMapper $CompanyCasesDataMapper */
-                $CompanyReviewsAndThanksDataMapper = Yii::createObject(CompanyReviewsAndThanksDataMapper::class, [Yii::$app->db]);
+                $CompanyReviewsAndThanksDataMapper = new CompanyReviewsAndThanksDataMapper(Yii::$app->db, new CompanyReviewsAndThanks());
 
                 $links = $FileUploaderManager
                     ->setFileNamePattern("reviews")

@@ -63,7 +63,7 @@ class ActivityDirectionsController extends Controller
     {
         $data = Yii::$app->request->post();
         /** @var ActivityDirectionDataMapper $dataMapper */
-        $dataMapper = Yii::createObject(ActivityDirectionDataMapper::class);
+        $dataMapper = new ActivityDirectionDataMapper(new ActivityDirection());
         $dataMapper->initReadyToViewActivities();
 
         $dataMapper->updateVisibility($data, true);

@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\EntityForm;
+use common\models\ActivityDirection;
 use Yii;
 use common\models\Service;
 use common\models\ServiceSearch;
@@ -73,7 +74,7 @@ class ServiceController extends Controller
     {
         $model = new Service();
         /** @var EntityForm $EntityForm */
-        $EntityForm = Yii::createObject(EntityForm::class);
+        $EntityForm = new EntityForm(new ActivityDirection());
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -114,7 +115,7 @@ class ServiceController extends Controller
     {
         $model = $this->findModel($id);
         /** @var EntityForm $EntityForm */
-        $EntityForm = Yii::createObject(EntityForm::class);
+        $EntityForm = new EntityForm(new ActivityDirection());
 
         $model->tags=explode(", ", $model->tags);
         $img=$model->logo;

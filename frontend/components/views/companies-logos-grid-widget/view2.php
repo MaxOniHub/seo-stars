@@ -9,7 +9,7 @@ use yii\helpers\Url;
         <li>
             <a href="<?= Url::toRoute([$target_url, 'alias' => $items[0]['alias']]); ?>" class="link">
                 <div class="image-contain">
-                    <img src="<?= $img_dir . "/" . $items[0]['logo']; ?>" alt="<?= $items[0]['name']; ?>"/>
+                    <img src="<?= $img_dir . $items[0]['logo']; ?>" alt="<?= $items[0]['name']; ?>"/>
                 </div>
             </a>
         </li>
@@ -26,7 +26,7 @@ $limit = 4;
                 <li>
                     <a href="<?= Url::toRoute([$target_url, 'alias' => $next['alias']]); ?>" class="link">
                         <div class="image-contain">
-                            <img src="<?= $img_dir . "/" . $next['logo']; ?>" alt="<?= $next['name']; ?>"/>
+                            <img src="<?= $img_dir . $next['logo']; ?>" alt="<?= $next['name']; ?>"/>
                         </div>
                     </a>
                 </li>

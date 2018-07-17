@@ -211,3 +211,8 @@ ul.dropdown-menu li.selected{
     color: #ff2250!important;
 }
 
+
+.footer-menu a {
+    color: #fff;
+    line-height: 1.71;
+}

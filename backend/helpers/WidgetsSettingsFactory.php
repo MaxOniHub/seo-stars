@@ -14,12 +14,12 @@ class WidgetsSettingsFactory
     {
         if (WidgetsNamesHolder::COUNTERS_TOP_PAGE == $widget_id) {
             /** @var CountersTopPageWidgetSettings $counterTopPage */
-            return Yii::createObject(CountersTopPageWidgetSettings::class);
+            return new CountersTopPageWidgetSettings();
         }
 
         if (WidgetsNamesHolder::REGIONS == $widget_id) {
             /** @var RegionsWidgetSettings $counterTopPage */
-            return Yii::createObject(RegionsWidgetSettings::class);
+            return new RegionsWidgetSettings();
         }
     }
 }

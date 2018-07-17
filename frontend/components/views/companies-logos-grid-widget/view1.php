@@ -11,7 +11,7 @@ $limit = 5;
                 <li>
                     <a href="<?= Url::toRoute([$target_url, 'alias' => $item['alias']]); ?>" class="link">
                         <div class="image-contain">
-                            <img src="<?= $img_dir . "/" . $item['logo']; ?>" alt="<?= $item['name']; ?>"/>
+                            <img src="<?= $img_dir  . $item['logo']; ?>" alt="<?= $item['name']; ?>"/>
                         </div>
                     </a>
                 </li>

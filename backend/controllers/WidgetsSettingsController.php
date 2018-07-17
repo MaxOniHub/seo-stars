@@ -64,11 +64,11 @@ class WidgetsSettingsController extends Controller
     public function actionUpdate($id)
     {
         /** @var WidgetSettingsDataMapper $WidgetSettingsDataMapper */
-        $WidgetSettingsDataMapper = Yii::createObject(WidgetSettingsDataMapper::class);
+        $WidgetSettingsDataMapper = new WidgetSettingsDataMapper(new WidgetsSettings());
         /** @var WidgetsSettings $widgetSettings */
         $widgetSettings = $WidgetSettingsDataMapper->findByPrimaryKey($id);
         /** @var WidgetsSettingsFactory $WidgetsSettingsFactory */
-        $WidgetsSettingsFactory = Yii::createObject(WidgetsSettingsFactory::class);
+        $WidgetsSettingsFactory = new WidgetsSettingsFactory();
 
         /** @var IWidgetSettings $widget */
         $widget = $WidgetsSettingsFactory->getWidgetSettings($id);

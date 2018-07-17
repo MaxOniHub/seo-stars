@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\data_mappers\ActivityDirectionDataMapper;
 use common\data_mappers\CompanyDataMapper;
+use common\models\Company;
 use Yii;
 use common\models\ActivityDirection;
 use common\models\ActivityDirectionSearch;
@@ -22,9 +23,9 @@ class ActivityDirectionsController extends Controller
     public function actionGetByType($slug)
     {
         /** @var CompanyDataMapper $companyDataMapper */
-        $companyDataMapper = Yii::createObject(CompanyDataMapper::class);
+        $companyDataMapper = new CompanyDataMapper(new Company());
         /** @var ActivityDirectionDataMapper $activityDirections */
-        $activityDirections = Yii::createObject(ActivityDirectionDataMapper::class);
+        $activityDirections = new ActivityDirectionDataMapper(new ActivityDirection());
 
         /** @var ActivityDirection $activity */
         $activity = $activityDirections->getByAlias($slug);

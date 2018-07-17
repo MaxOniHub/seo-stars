@@ -26,7 +26,7 @@ use yii\helpers\Html;
         ga('send', 'pageview');
 
     </script>
-    <?= Yii::$app->metrics->getMetricsScript(); ?>
+    <?= Yii::$app->theme->getMetricsScript(); ?>
     <?php $this->head() ?>
 
 </head>
