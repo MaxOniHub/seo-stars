@@ -2,9 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\models\CompanyForm;
 use backend\models\EntityForm;
-use claviska\SimpleImage;
 use common\data_mappers\CompanyCasesDataMapper;
 use common\data_mappers\CompanyReviewsAndThanksDataMapper;
 use common\managers\FileUploaderManager;
@@ -16,8 +14,6 @@ use Yii;
 use common\models\Company;
 use common\models\CompanySearch;
 use backend\models\LoadFile;
-use yii\helpers\BaseFileHelper;
-use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,8 +23,6 @@ use yii\helpers\Json;
 use common\models\User;
 use yii\filters\AccessControl;
 
-use backend\components\PHPExcel\Classes\PHPExcel;
-use backend\components\PHPExcel\Classes\PHPExcel\PHPExcel_IOFactory;
 
 /**
  * CompanyController implements the CRUD actions for Company model.
@@ -124,7 +118,7 @@ class CompanyController extends Controller
             if ($model->cases = UploadedFile::getInstances($model, 'cases'))
             {
                 /** @var FileUploaderManager $FileUploaderManager */
-                $FileUploaderManager = new FileUploaderManager(new SimpleImage());
+                $FileUploaderManager = new FileUploaderManager();
                 /** @var CompanyCasesDataMapper $CompanyCasesDataMapper */
                 $CompanyCasesDataMapper = new CompanyCasesDataMapper(Yii::$app->db, new CompanyCases());
 
@@ -143,7 +137,7 @@ class CompanyController extends Controller
             if ($model->reviews_and_thanks = UploadedFile::getInstances($model, 'reviews_and_thanks'))
             {
                 /** @var FileUploaderManager $FileUploaderManager */
-                $FileUploaderManager = new FileUploaderManager(new SimpleImage());
+                $FileUploaderManager = new FileUploaderManager();
                 /** @var CompanyReviewsAndThanksDataMapper $CompanyCasesDataMapper */
                 $CompanyReviewsAndThanksDataMapper = new CompanyReviewsAndThanksDataMapper(Yii::$app->db, new CompanyReviewsAndThanks());
 
@@ -218,7 +212,7 @@ class CompanyController extends Controller
             if ($model->cases = UploadedFile::getInstances($model, 'cases'))
             {
                 /** @var FileUploaderManager $FileUploaderManager */
-                $FileUploaderManager = new FileUploaderManager(new SimpleImage());
+                $FileUploaderManager = new FileUploaderManager();
                 /** @var CompanyCasesDataMapper $CompanyCasesDataMapper */
                 $CompanyCasesDataMapper = new CompanyCasesDataMapper(Yii::$app->db, new CompanyCases());
 
@@ -237,7 +231,7 @@ class CompanyController extends Controller
             if ($model->reviews_and_thanks = UploadedFile::getInstances($model, 'reviews_and_thanks'))
             {
                 /** @var FileUploaderManager $FileUploaderManager */
-                $FileUploaderManager = new FileUploaderManager(new SimpleImage());
+                $FileUploaderManager = new FileUploaderManager();
                 /** @var CompanyReviewsAndThanksDataMapper $CompanyCasesDataMapper */
                 $CompanyReviewsAndThanksDataMapper = new CompanyReviewsAndThanksDataMapper(Yii::$app->db, new CompanyReviewsAndThanks());
 

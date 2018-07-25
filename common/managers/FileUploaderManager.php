@@ -2,8 +2,8 @@
 
 namespace common\managers;
 
-use claviska\SimpleImage;
 use common\interfaces\IFileUploader;
+use Intervention\Image\ImageManagerStatic as Image;
 use yii\helpers\BaseFileHelper;
 use yii\web\UploadedFile;
 
@@ -24,16 +24,6 @@ class FileUploaderManager implements IFileUploader
     private $uid;
 
     private $file_name_pattern;
-
-    /**
-     * @var SimpleImage
-     */
-    private $SimpleImage;
-
-    public function __construct(SimpleImage $simpleImage)
-    {
-        $this->SimpleImage = $simpleImage;
-    }
 
     /**
      * @return integer
@@ -144,8 +134,8 @@ class FileUploaderManager implements IFileUploader
             BaseFileHelper::createDirectory($path_origin);
             BaseFileHelper::createDirectory($path_thumb);
 
-            $link_to_origin = $path_origin . '/' . $this->getFileName('', $key, $file->extension);
-            $link_to_thumb = $path_thumb . '/' . $this->getFileName('', '-small' . $key, $file->extension);
+            $link_to_origin = $path_origin . '/' . $this->getFileName('', time(), $file->extension);
+            $link_to_thumb = $path_thumb . '/' . $this->getFileName('', '-small' . time(), $file->extension);
 
             $file->saveAs($link_to_origin);
 
@@ -164,8 +154,8 @@ class FileUploaderManager implements IFileUploader
     public function makeThumbnail($from_file, $to_file, $options = ["width" => null, "height" => null, "quality" => 100])
     {
         try {
-            $this->SimpleImage->fromFile($from_file)->thumbnail($options["width"], $options["height"], 'center')
-                ->toFile($to_file, null, $options["quality"]);
+            Image::make($from_file)->fit($options["width"], $options["height"])
+                ->save($to_file);
         } catch (\Exception $e) {
 
         }
