@@ -34,6 +34,7 @@ use common\models\Region;
                             'verticalbuttons' => true,
                             'verticalupclass' => 'glyphicon glyphicon-plus',
                             'verticaldownclass' => 'glyphicon glyphicon-minus',
+                            'max' => 99999,
                         ]
                     ]);
                     ?>
@@ -47,7 +48,7 @@ use common\models\Region;
                         'pluginOptions' => [
                             'initval' => 1.00,
                             'decimals' => 2,
-                            'step' => 0.5,
+                            'step' => 0.1,
                             'verticalbuttons' => true,
                             'verticalupclass' => 'glyphicon glyphicon-plus',
                             'verticaldownclass' => 'glyphicon glyphicon-minus',

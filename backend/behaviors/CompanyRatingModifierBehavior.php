@@ -35,8 +35,12 @@ class CompanyRatingModifierBehavior extends AttributeBehavior
         $owner = $this->owner;
         $old_attr = $owner->getOldAttributes();
 
-        if ($old_attr["about"] != $owner->about || $old_attr["clients"] != $owner->clients ||
-            count($this->owner->reviews_and_thanks) > 0 || count($this->owner->cases) > 0) {
+        if ($old_attr["about"] != $owner->about ||
+            $old_attr["clients"] != $owner->clients ||
+            $old_attr["raiting"] != $owner->raiting ||
+            $old_attr["multiplier"] != $owner->multiplier ||
+            count($this->owner->reviews_and_thanks) > 0 ||
+            count($this->owner->cases) > 0) {
             return true;
         }
 
@@ -46,8 +50,14 @@ class CompanyRatingModifierBehavior extends AttributeBehavior
 
     private function calculateRating()
     {
-
-        return (new ProfileRatingCounter($this->owner->profile_complete_status, $this->owner->raiting,   $this->owner->multiplier, $this->owner->reviews))->calculate();
+        $votes = ActiveRecord::findBySql("CALL review_votes(:EntityID, :ColumnName)",
+            [
+                ":EntityID" => $this->owner->id,
+                ":ColumnName" => 'company_id',
+            ])
+            ->select('id')
+            ->scalar();
+        return (new ProfileRatingCounter($this->owner->profile_complete_status, $this->owner->multiplier, $votes))->calculate();
     }
 
 }

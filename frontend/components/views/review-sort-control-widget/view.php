@@ -20,42 +20,44 @@ use yii\helpers\Url;
 
 
                 <li title="Популярность">
-                    <span>Популярность</span>
                     <span>
-                          <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist'=> $gist, 'sort' => 'popular']); ?>">
+                          <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist' => $gist, 'sort' => 'popular']); ?>">
                               <i class="icon icon-angle-arrow-down up"></i>
                           </a>
                     </span>
+                    <span>Популярность</span>
                     <span>
-                        <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist'=> $gist, 'sort' => 'popular', 'sort_desc' => 'desc']); ?>">
+                        <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist' => $gist, 'sort' => 'popular', 'sort_desc' => 'desc']); ?>">
                               <i class="icon icon-angle-arrow-down down"></i>
                         </a>
                     </span>
                 </li>
 
                 <li title="Дата">
-                    <span>Дата</span>
-                    <span>
-                        <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist'=> $gist]); ?>">
+                        <span>
+                        <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist' => $gist]); ?>">
                                 <i class="icon icon-angle-arrow-down up"></i>
                         </a>
                     </span>
+                    <span>Дата</span>
                     <span>
-                        <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist'=> $gist, 'sort_desc' => 'desc']); ?>">
+                        <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist' => $gist, 'sort_desc' => 'desc']); ?>">
                               <i class="icon icon-angle-arrow-down down"></i>
                         </a>
                     </span>
                 </li>
 
                 <li title="Негатив/Позитив">
-                    <span>Негатив/Позитив</span>
-                    <span>
-                         <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist'=> $gist, 'sort' => 'bad-good']); ?>" >
+
+                      <span>
+                         <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist' => $gist, 'sort' => 'bad-good']); ?>">
                                <i class="icon icon-angle-arrow-down up"></i>
                          </a>
                     </span>
+                    <span>Негатив/Позитив</span>
+
                     <span>
-                        <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist'=> $gist, 'sort' => 'bad-good', 'sort_desc' => 'desc']); ?>">
+                        <a href="<?= Url::toRoute([$target_url, 'id' => $entity_id, 'gist' => $gist, 'sort' => 'bad-good', 'sort_desc' => 'desc']); ?>">
                             <i class="icon icon-angle-arrow-down down"></i>
                         </a>
                     </span>

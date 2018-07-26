@@ -1,4 +1,7 @@
 <?php
+
+use common\helpers\ValueChecker;
+
 $imgPath = Yii::$app->params['imgPath'];
 
 /**
@@ -16,9 +19,9 @@ $imgPath = Yii::$app->params['imgPath'];
                         <div class="info">
                             <div class="name">Сайт</div>
                             <?php if ($service["site_link"] == 1) : ?>
-                                <?= \yii\helpers\Html::a($service["site"], $service["site"], ["target" => "_blank"]) ?>
+                                <div class="value"> <?= \yii\helpers\Html::a($service["site"], $service["site"], ["target" => "_blank"]) ?> </div>
                             <?php else: ?>
-                                <?= $service["site"]; ?>
+                                <div class="value"><?= $service["site"]; ?></div>
                             <?php endif; ?>
                         </div>
                     </li>
@@ -26,41 +29,46 @@ $imgPath = Yii::$app->params['imgPath'];
                         <i class="icon icon-call-answer"></i>
                         <div class="info">
                             <div class="name">Телефон</div>
-                            <div class="value"><?= $service->tel; ?></div>
+                            <div class="value"><?= ValueChecker::checkValue($service->tel); ?></div>
                         </div>
                     </li>
                     <li>
                         <i class="icon icon-mail-black-envelope-symbol"></i>
                         <div class="info">
                             <div class="name">E-mail</div>
-                            <div class="value"><?= $service->email; ?></div>
+                            <div class="value"><?= ValueChecker::checkValue($service->email); ?></div>
                         </div>
                     </li>
+                </ul>
+
+            </div>
+            <div class="col-xs-12 col-md-6 align-left md-align-center">
+                <ul class="person-info-list">
                     <li>
                         <i class="icon icon-microphone"></i>
                         <div class="info">
                             <div class="name">Персоны</div>
-                            <div class="value"><?= $service->peoples_string ?></div>
+                            <div class="value"><?= ValueChecker::checkValue($service->peoples_string); ?></div>
                         </div>
                     </li>
                     <li>
                         <i class="icon icon-star-3"></i>
                         <div class="info">
                             <div class="name">Рейтинг</div>
-                            <div class="value"><?= $service->getRating() ?></div>
+                            <div class="value"><?= ValueChecker::checkValue($service->raiting); ?></div>
                         </div>
                     </li>
                     <li>
                         <i class="icon icon-star-3"></i>
                         <div class="info">
                             <div class="name">Отзывы</div>
-                            <div class="value"><?= $service->reviews; ?></div>
+                            <div class="value"><?= ValueChecker::checkValue($service->reviews); ?></div>
                         </div>
                     </li>
                 </ul>
-                <div class="social-title">Соцсети:</div>
-                <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $service->vk_group, "fb_group" => $service->fb_group]) ?>
             </div>
+            <div class="social-title">Соцсети:</div>
+            <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $service->vk_group, "fb_group" => $service->fb_group]) ?>
         </div>
     </div>
 

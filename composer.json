@@ -31,7 +31,8 @@
         "kartik-v/yii2-widget-fileinput": "@dev",
         "claviska/simpleimage": "^3.3",
         "kartik-v/yii2-widget-touchspin": "*",
-        "purrweb/yii2-heroku": "*"
+        "purrweb/yii2-heroku": "*",
+        "intervention/image": "^2.4"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

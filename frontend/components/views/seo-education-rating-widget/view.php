@@ -9,7 +9,7 @@ use yii\helpers\Url;
         <tr>
             <th>Место</th>
             <th>Название</th>
-            <th>Теги</th>
+            <th class="md-none">Теги</th>
             <th>Рейтинг</th>
             <th>Отзывы</th>
         </tr>
@@ -23,7 +23,25 @@ use yii\helpers\Url;
             <?php $link = Url::toRoute(['main/company', 'alias' => $item['alias']]); ?>
             <tr>
                 <td class="numb"><?= $index ?></td>
-                <td><?= \yii\helpers\Html::a($item["name"], $link) ?></td>
+
+                <td class="company">
+                    <div class="md-hidden">
+                        <?= \yii\helpers\Html::a($item["name"], $link) ?>
+                    </div>
+                    <div class="md-visible">
+                        <div class="company-title" data-toggle='#row-<?= $index ?>'><?= $item["name"] ?></div>
+                        <div id="row-<?= $index ?>" class="content">
+                            <div class="cell">
+                                <div class="title">Теги:</div>
+                                <div class="value light">
+                                    <?= $item["tags"] ?>
+                                </div>
+                            </div>
+                            <a href="<?= $link ?>" class="more-link">Подробнее<i class="icon icon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                </td>
+
                 <td class="md-none"><?= $item["tags"] ?></td>
                 <td><?= $item["raiting"] ?></td>
                 <td><?= $item["reviews"] ?></td>
