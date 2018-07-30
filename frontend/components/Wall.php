@@ -15,7 +15,7 @@
                     $this->group_id=substr($name,4);
                 else 
                 {
-                    $group_id=@file_get_contents("https://api.vk.com/method/groups.getById?group_ids=".$name . self::VER, false, stream_context_create(['http'=>['timeout'=>1]]));
+                    $group_id=@file_get_contents("https://api.vk.com/method/groups.getById?access_token=005779e1005779e100ebda815c0003b71600057005779e158eca5311aca80647ac8e0e4&group_ids=".$name . self::VER, false, stream_context_create(['http'=>['timeout'=>1]]));
                     $group_id=json_decode($group_id);
                     $this->group_id=$group_id->response[0]->gid;
                 }
@@ -26,7 +26,7 @@
                     $this->group_id=substr($name,2);
                 else 
                 {
-                    $group_id=@file_get_contents("https://api.vk.com/method/users.get?user_ids=".$name . self::VER, false, stream_context_create(['http'=>['timeout'=>1]]));
+                    $group_id=@file_get_contents("https://api.vk.com/method/users.get?access_token=005779e1005779e100ebda815c0003b71600057005779e158eca5311aca80647ac8e0e4&user_ids=".$name . self::VER, false, stream_context_create(['http'=>['timeout'=>1]]));
                     $group_id=json_decode($group_id);
                     $this->group_id=$group_id->response[0]->uid;
                 }

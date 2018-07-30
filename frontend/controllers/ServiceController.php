@@ -46,12 +46,14 @@ class ServiceController extends MyController
             $fbhref=$fbauth->getHref();
 
             try {
+                if ($service->vk_group) {
+                    $wall = (new Wall($service->vk_group))->getWall();}
+            } catch (yii\base\ErrorException $e) {}
+            try {
                 if ($service->fb_group) {
-                    $fb_wall = (new WallFB($service->fb_group))->getWall();
-                }
-            } catch (yii\base\ErrorException $e) {
+                    $fb_wall = (new WallFB($service->fb_group))->getWall();}
+            } catch (yii\base\ErrorException $e) {}
 
-            }
 
             $model=new ReviewForm();
             $model->star=3;
@@ -88,7 +90,7 @@ class ServiceController extends MyController
                 'sort'=>$sort,
                 'sort_desc'=>$sort_desc,
                 'alias'=>$alias,
-                'wall'=>null,
+                'wall'=>$wall,
                 'fb_wall'=>$fb_wall,
                 'wall_cach'=>Theme::find()->select('wall_cach')->where(['id'=>1])->one(),
                 'comments'=>Review::getAllComments($service->id, 'service_id', $sort, $sort_desc)

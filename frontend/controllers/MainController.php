@@ -89,14 +89,16 @@ class MainController extends MyController
         if($company->name)
         {
             $fbauth = new FbAuth($alias, 'company');
+            $vkauth = new VkAuth($alias, 'company');
 
             try {
+                if ($company->vk_group) {
+                    $wall = (new Wall($company->vk_group))->getWall();}
+            } catch (yii\base\ErrorException $e) {}
+            try {
                 if ($company->fb_group) {
-                    $fb_wall = (new WallFB($company->fb_group))->getWall();
-                }
-            } catch (yii\base\ErrorException $e) {
-
-            }
+                    $fb_wall = (new WallFB($company->fb_group))->getWall();}
+            } catch (yii\base\ErrorException $e) {}
 
             $model=new ReviewForm();
             $model->star=3;
