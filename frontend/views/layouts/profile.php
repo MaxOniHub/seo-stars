@@ -21,14 +21,14 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-8 col-md-offset-1">
                         <?= $content; ?>
+                        <?= \frontend\components\ReviewFormWidget::widget();?>
                     </div>
                     <div class="col-xs-12 col-md-3">
                        <?= $this->render("partials/_right_sidebar")?>
                     </div>
+
                 </div>
-                <div class="row">
-                    <?= \frontend\components\ReviewFormWidget::widget();?>
-                </div>
+
             </div>
         </section>
 

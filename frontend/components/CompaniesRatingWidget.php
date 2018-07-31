@@ -40,6 +40,11 @@ class CompaniesRatingWidget extends Widget
         return count($cases);
     }
 
+    public function getRating($object)
+    {
+        return isset($object['mod_rating']) && !empty($object['mod_rating']) && $object['mod_rating'] != 0 ? $object['mod_rating'] : $object['raiting'];
+    }
+
     public function getTargetUrl($object)
     {
         return \yii\helpers\Html::a($object["name"],  Url::toRoute(['company', 'alias' => $object['alias']]));

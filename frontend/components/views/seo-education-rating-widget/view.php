@@ -43,7 +43,7 @@ use yii\helpers\Url;
                 </td>
 
                 <td class="md-none"><?= $item["tags"] ?></td>
-                <td><?= $item["raiting"] ?></td>
+                <td><?= $widget->getRating($item); ?></td>
                 <td><?= $item["reviews"] ?></td>
             </tr>
         <?php endforeach; ?>

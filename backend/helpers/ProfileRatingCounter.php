@@ -12,19 +12,20 @@ class ProfileRatingCounter
 
     private $multiplier;
 
-    private $votes;
+    private $rating;
+
+    private $mod_rating;
 
     /**
      * ProfileRatingCounter constructor.
-     * @param integer $profile_completion
-     * @param float $multiplier
-     * @param $votes
+     * @param array $options
      */
-    public function __construct($profile_completion, $multiplier, $votes)
+    public function __construct($options = ['profile_completion' => 0, 'multiplier' => 0, 'base_rating' => 0])
     {
-        $this->profile_completion = $profile_completion;
-        $this->multiplier = $multiplier;
-        $this->votes = $votes;
+        $this->profile_completion = $options['profile_completion'];
+        $this->multiplier = $options['multiplier'];
+        $this->rating = $options['base_rating'];
+
     }
 
     public function calculate()
@@ -32,15 +33,12 @@ class ProfileRatingCounter
         /** get percents */
         $this->profile_completion *= 0.01;
 
-        $rating = $this->votes;
-
-        /** Rating based on profile completion */
-        $rating *= $this->profile_completion;
-
-        if ($rating == 0) {
-            $rating = round($this->profile_completion);
+        if ($this->rating == 0) {
+            $this->rating = round($this->profile_completion);
         }
 
-        return round($rating * $this->multiplier, 0, PHP_ROUND_HALF_UP);
+        $this->mod_rating = $this->rating * $this->profile_completion * $this->multiplier;
+
+        return round($this->mod_rating, 0, PHP_ROUND_HALF_UP);
     }
 }

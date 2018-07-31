@@ -2,7 +2,7 @@
 
 ?>
 
-<div class="col-xs-12 col-md-11 col-md-offset-1">
+<div class="col-xs-12 col-md-12 col-md-offset-1" id="review-block">
     <div class="write-review top-offset align-left md-align-center">
 
         <div class="title">Довольны работой компании или разочарованы?<br><span class="mark">Оставьте свой отзыв!</span>

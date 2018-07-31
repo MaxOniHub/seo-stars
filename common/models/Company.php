@@ -17,6 +17,7 @@ use yii\helpers\Url;
  * @property string $alias
  * @property string $site
  * @property integer $raiting
+ * @property integer $mod_rating
  * @property integer $reviews
  * @property string $clients
  * @property string $vk_group
@@ -83,7 +84,7 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
     {
         return [
             [['name', 'alias'], 'required'],
-            [['raiting', 'reviews', 'site_link', 'profile_complete_status'], 'integer'],
+            [['mod_rating', 'raiting', 'reviews', 'site_link', 'profile_complete_status'], 'integer'],
             [['about', 'seo_title', 'seo_keys', 'seo_desc', 'videos', 'clients'], 'string'],
             [['tags', 'regions'], 'safe'],
             [['name', 'alias', 'site', 'vk_group', 'fb_group', 'tel', 'year'], 'string', 'max' => 255],
@@ -106,7 +107,8 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
             'site' => 'Сайт',
             'site_link'=>'Активировать ссылку на сайт',
             'videos'=>'Видео с ютуба',
-            'raiting' => 'Рейтинг',
+            'raiting' => 'Базовый рейтинг',
+            'mod_rating' => 'Модифицированный рейтинг',
             'reviews' => 'Отзывы',
             'clients' => 'Клиенты',
             'vk_group' => 'Группа VK',
@@ -124,7 +126,7 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
             'activities_ids' => 'Направления деятельности',
             'cases' => 'Кейсы',
             'reviews_and_thanks' => 'Отзывы и благодарности клиентов',
-            'profile_complete_status' => 'Статус наполненности профиля(%)',
+            'profile_complete_status' => 'Наполненности профиля(%)',
             'multiplier' => 'Мультипликатор',
         ];
     }
@@ -142,7 +144,7 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
 
     public function getRating()
     {
-        return $this->raiting;
+        return $this->mod_rating;
     }
 
     public function getReviews()
@@ -176,27 +178,27 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
     }
     public function getTop()
     {
-        return static::find()->orderBy('raiting DESC')->limit(12)->all();
+        return static::find()->orderBy('mod_rating DESC')->limit(12)->all();
     }
     public function getWhorst()
     {
-        return static::find()->orderBy('raiting')->limit(12)->all();
+        return static::find()->orderBy('mod_rating')->limit(12)->all();
     }
     public function getAll()
     {
-        return static::find()->orderBy('raiting DESC')->asArray()->all();
+        return static::find()->orderBy('mod_rating DESC')->asArray()->all();
     }
     public function getCity1()
     {
-        return static::find()->where(['like', 'regions', 'Москва'])->orderBy('raiting DESC')->limit(12)->all();
+        return static::find()->where(['like', 'regions', 'Москва'])->orderBy('mod_rating DESC')->limit(12)->all();
     }
     public function getCity2()
     {
-        return static::find()->where(['like', 'regions', 'Питер'])->orderBy('raiting DESC')->limit(12)->all();
+        return static::find()->where(['like', 'regions', 'Питер'])->orderBy('mod_rating DESC')->limit(12)->all();
     }
     public function getAllinAlias($name)
     {
-        return static::find()->where(['like', 'regions', $name])->orderBy('raiting')->limit(12)->all();
+        return static::find()->where(['like', 'regions', $name])->orderBy('mod_rating')->limit(12)->all();
     }
     public function getTableMain($regions, $tags, $limit, $sort)
     {
@@ -228,9 +230,9 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
         if($sort)
         {
             if($sort=="raiting")
-                $query=$query->orderBy('raiting DESC');
+                $query=$query->orderBy('mod_rating DESC');
             else if($sort=="raiting_bad")
-                $query=$query->orderBy('raiting');
+                $query=$query->orderBy('mod_rating');
             else if($sort=="reviews")
                 $query=$query->orderBy('reviews DESC');
             else if($sort=="reviews_bad")
@@ -280,9 +282,9 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
         if($page->sort_by)
         {
             if($page->sort_by=="raiting")
-                $query=$query->orderBy('raiting DESC');
+                $query=$query->orderBy('mod_rating DESC');
             else if($page->sort_by=="raiting_bad")
-                $query=$query->orderBy('raiting');
+                $query=$query->orderBy('mod_rating');
             else if($page->sort_by=="reviews")
                 $query=$query->orderBy('reviews DESC');
             else if($page->sort_by=="reviews_bad")
@@ -292,11 +294,11 @@ class Company extends \yii\db\ActiveRecord implements IBasicEntity
     }
     public static function findBestCompanies()
     {
-        return self::find()->orderBy('raiting DESC')->limit(14)->asArray()->all();
+        return self::find()->orderBy('mod_rating DESC')->limit(14)->asArray()->all();
     }
     public static function findBestEDCompanies()
     {
-        return self::find()->where(['like', 'tags', 'Обучение'])->orderBy('raiting DESC')->limit(14)->asArray()->all();
+        return self::find()->where(['like', 'tags', 'Обучение'])->orderBy('mod_rating DESC')->limit(14)->asArray()->all();
     }
 
     public function getActivities()

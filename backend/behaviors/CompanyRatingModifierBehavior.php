@@ -23,41 +23,18 @@ class CompanyRatingModifierBehavior extends AttributeBehavior
 
     public function beforeSave($event)
     {
-        if ($this->canUpdateRating()) {
-            $updated_rating = $this->calculateRating();
-            $this->owner->updateAttributes(["raiting" => $updated_rating]);
-        }
-    }
-
-    private function canUpdateRating()
-    {
-        /** @var ActiveRecord $owner */
-        $owner = $this->owner;
-        $old_attr = $owner->getOldAttributes();
-
-        if ($old_attr["about"] != $owner->about ||
-            $old_attr["clients"] != $owner->clients ||
-            $old_attr["raiting"] != $owner->raiting ||
-            $old_attr["multiplier"] != $owner->multiplier ||
-            count($this->owner->reviews_and_thanks) > 0 ||
-            count($this->owner->cases) > 0) {
-            return true;
-        }
-
-        return false;
-
+        $updated_rating = $this->calculateRating();
+        $this->owner->updateAttributes(["mod_rating" => $updated_rating]);
     }
 
     private function calculateRating()
     {
-        $votes = ActiveRecord::findBySql("CALL review_votes(:EntityID, :ColumnName)",
-            [
-                ":EntityID" => $this->owner->id,
-                ":ColumnName" => 'company_id',
-            ])
-            ->select('id')
-            ->scalar();
-        return (new ProfileRatingCounter($this->owner->profile_complete_status, $this->owner->multiplier, $votes))->calculate();
+        $options = [
+            'profile_completion' => $this->owner->profile_complete_status,
+            'multiplier' => $this->owner->multiplier,
+            'base_rating' => $this->owner->raiting,
+        ];
+        return (new ProfileRatingCounter($options))->calculate();
     }
 
 }

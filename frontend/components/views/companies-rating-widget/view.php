@@ -17,7 +17,7 @@
                 <td class="numb"><?= $key+1 ?></td>
                 <td class="company"><?= $widget->getTargetUrl($item); ?></td>
                 <td><?= $widget->countCases($item["casesFiles"])?></td>
-                <td><?= $item["raiting"]?></td>
+                <td><?= $widget->getRating($item); ?></td>
                 <td><?= $item["reviews"]?></td>
             </tr>
         <?php endforeach; ?>

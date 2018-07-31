@@ -2,9 +2,8 @@
 
 namespace frontend\components;
 
-use yii\base\Widget;
 
-class SeoEducationRatingWidget extends Widget
+class SeoEducationRatingWidget extends CompaniesRatingWidget
 {
     public $items;
 

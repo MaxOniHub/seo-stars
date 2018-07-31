@@ -50,7 +50,7 @@
                 <td class="md-none"><?= $item["regions"]?></td>
                 <td class="md-none"><?= $item["year"]?></td>
                 <td class="md-none"><?= $widget->countCases($item["casesFiles"])?></td>
-                <td><?= $item["raiting"]?></td>
+                <td><?= $widget->getRating($item); ?></td>
                 <td><?= $item["reviews"]?></td>
             </tr>
         <?php endforeach; ?>

@@ -26,7 +26,7 @@ use common\models\Region;
         </div>
         <div class="col-md-8">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <?=
                     $form->field($model, 'raiting')->widget(TouchSpin::classname(), [
                         'options'=>['placeholder'=>'Введите рейтинг'],
@@ -39,10 +39,15 @@ use common\models\Region;
                     ]);
                     ?>
                 </div>
-                <div class="col-md-4">
-                    <?= $form->field($model, 'profile_complete_status')->textInput(['maxlength' => true, "disabled" => true]) ?>
+                <div class="col-md-3">
+                    <?=
+                      $form->field($model, 'mod_rating')->textInput(['maxlength' => true, "disabled" => true])
+                    ?>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
+                    <?= $form->field($model, 'profile_complete_status')->textInput(['maxlength' => true, "disabled" => true]); ?>
+                </div>
+                <div class="col-md-2">
                     <?= $form->field($model, 'multiplier')->widget(TouchSpin::classname(), [
                         'options'=>['placeholder'=>'Введите мультипликатор'],
                         'pluginOptions' => [
@@ -57,8 +62,10 @@ use common\models\Region;
                     ?>
                 </div>
             </div>
+        </div>
 
-
+        <div class="col-md-12">
+           <p><i><span class="badge label-warning">?</span><code>Модифицированный рейтинг</code>будет отображаться на сайте как значение рейтинга Компании и рассчитывается по формуле</i><code>Базовый рейтинг</code>*<code>Наполенность профиля</code>*<code>Мультипликатор</code></p>
         </div>
     </div>
 

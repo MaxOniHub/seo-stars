@@ -95,9 +95,18 @@ ul.sort li {
 
 }
 
-.social-title, .social-list
+.social-title
+{
+    margin-top: -15px;
+}
+.social-list
 {
     padding-top: 20px;
+}
+
+.main-footer .social-list
+{
+    padding-top: 0;
 }
 
 .social-title
@@ -126,7 +135,7 @@ ul.sort li {
 }
 
 .news-record {
-
+    padding: 0;
     margin-top: 25px;
 
 }
@@ -446,5 +455,64 @@ ul.dropdown-menu li.selected {
 @media (max-width: 992px) {
     .person-info .person-info-list {
         margin-top: 0px!important;
+    }
+}
+
+/*
+    VK Wall
+*/
+.row.photos .col-md-3 img,
+.row.photos .col-md-4 img,
+.row.photos .col-md-5 img,
+.row.photos .col-md-6 img,
+.row.photos .col-md-7 img,
+.row.photos .col-md-8 img,
+.row.photos .col-md-9 img,
+.row.photos .col-md-10 img,
+.row.photos .col-md-11 img,
+.row.photos .col-md-12 img
+{
+    width: 100%;
+}
+
+.row.photos .col-md-3,
+.row.photos .col-md-4,
+.row.photos .col-md-5,
+.row.photos .col-md-6,
+.row.photos .col-md-7,
+.row.photos .col-md-8,
+.row.photos .col-md-9,
+.row.photos .col-md-10,
+.row.photos .col-md-11
+{
+    width: 50%;
+    display: block;
+    max-width: 50%;
+}
+.row.photos .col-md-12
+{
+    width: 100%;
+    max-width: 100%;
+}
+
+@media (max-width: 992px) {
+    .main-footer .footer-menu>li a {
+        font-size: 16px;
+    }
+    .main-footer .footer-menu>li {
+        margin-bottom: 0px;
+    }
+}
+
+@media (max-width: 480px) {
+    .company-info .social-title {
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 480px){
+    .testimonials-list-vertical .testimonial-card .info .star-rating,
+    .testimonials-list-vertical .testimonial-card .info .date, .testimonials-list-vertical .testimonial-card .info .name{
+        width: 100%;
     }
 }

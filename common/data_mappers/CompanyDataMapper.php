@@ -19,12 +19,12 @@ class CompanyDataMapper
 
     public function getAll()
     {
-        return $this->basicQuery()->orderBy([ 'raiting' => SORT_DESC])->asArray()->all();
+        return $this->basicQuery()->orderBy([ 'mod_rating' => SORT_DESC])->asArray()->all();
     }
 
     public function getCompaniesByActivity($activity_alias)
     {
-        return $this->basicQuery()->where(["activity_direction.alias" => $activity_alias])->orderBy([ 'raiting' => SORT_DESC])->asArray()->all();
+        return $this->basicQuery()->where(["activity_direction.alias" => $activity_alias])->orderBy(['mod_rating' => SORT_DESC])->asArray()->all();
     }
 
     private function basicQuery()
