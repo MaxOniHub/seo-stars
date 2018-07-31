@@ -38,8 +38,10 @@ $imgPath = Yii::$app->params['imgPath'];
                     </div>
                 </li>
             </ul>
-            <div class="social-title">Соцсети:</div>
-            <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $person["vk_group"], "fb_group" => $person["fb_group"]]) ?>
+            <div class="socials">
+                <div class="social-title">Соцсети:</div>
+                <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $person["vk_group"], "fb_group" => $person["fb_group"]]) ?>
+            </div>
         </div>
         <div class="col-xs-12 col-md-6 first-xs last-md">
             <div class="image-cover">

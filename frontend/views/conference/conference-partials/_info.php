@@ -76,9 +76,11 @@ $imgPath = Yii::$app->params['imgPath'];
                     </li>
                 </ul>
                 <?php if ($conference->vk_group || $conference->fb_group): ?>
-                    <div class="social-title">Соцсети:</div>
-                    <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $conference->vk_group, "fb_group" => $conference->fb_group]) ?>
-                <?php endif;?>
+                    <div class="socials">
+                        <div class="social-title">Соцсети:</div>
+                        <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $conference->vk_group, "fb_group" => $conference->fb_group]) ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
         </div>

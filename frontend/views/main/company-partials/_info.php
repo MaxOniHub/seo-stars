@@ -65,8 +65,9 @@
         </li>
     </ul>
 
-    <div class="social-title">Соцсети:</div>
+    <div class="socials">
+        <div class="social-title">Соцсети:</div>
 
-    <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $company["vk_group"], "fb_group" => $company["fb_group"]]) ?>
-
+        <?= \frontend\components\ProfileSocialsIconsWidget::widget(["vk_group" => $company["vk_group"], "fb_group" => $company["fb_group"]]) ?>
+    </div>
 </div>

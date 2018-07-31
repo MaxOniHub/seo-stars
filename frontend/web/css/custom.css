@@ -94,16 +94,6 @@ ul.sort li {
     font-weight: bold;
 
 }
-
-.social-title
-{
-    margin-top: -15px;
-}
-.social-list
-{
-    padding-top: 20px;
-}
-
 .main-footer .social-list
 {
     padding-top: 0;
@@ -118,6 +108,31 @@ ul.sort li {
 
     top: 0px !important;
 
+}
+
+.social-list, .social-title
+{
+    margin-top: 10px;
+}
+
+.socials
+{
+    margin-top: 20px;
+}
+
+.socials .social-title
+{
+    margin-top: -15px;
+    padding: 0;
+}
+.socials  .social-list
+{
+    margin-top: 0;
+}
+
+.company-info .social-title
+{
+    padding-left: 0;
 }
 
 .company-clients > li.violet span {
