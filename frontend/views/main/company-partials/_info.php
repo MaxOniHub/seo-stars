@@ -25,14 +25,15 @@
             <i class="icon icon-call-answer"></i>
             <div class="info">
                 <div class="name">Телефон</div>
-                <div class="value"><?= $company["tel"]; ?></div>
+                <div class="value"><?= !empty($company["tel"]) ? $company["tel"] : "-" ?></div>
             </div>
         </li>
         <li>
             <i class="icon icon-mail-black-envelope-symbol"></i>
             <div class="info">
                 <div class="name">E-MAIL</div>
-                <div class="value"><?= $company["email"]; ?></div>
+                <div class="value"><?= !empty($company["email"]) ? $company["email"] : "-"?>
+                </div>
             </div>
         </li>
         <li>
@@ -53,7 +54,7 @@
             <i class="icon icon-multiple-users-silhouette"></i>
             <div class="info">
                 <div class="name">Люди</div>
-                <div class="value"><?= $company["peoples_string"]; ?></div>
+                <div class="value"><?= !empty($company["people_string"]) ? $company["people_string"] : "-" ?></div>
             </div>
         </li>
         <li>

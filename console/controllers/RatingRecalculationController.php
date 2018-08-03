@@ -8,7 +8,7 @@ use common\models\Company;
 use yii\console\Controller;
 
 /**
- * Class UrlParserController
+ * Class RatingRecalculationController
  * @package console\controllers
  */
 class RatingRecalculationController extends Controller
