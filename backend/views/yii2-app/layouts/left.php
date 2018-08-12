@@ -32,6 +32,7 @@
                     ['label' => 'Страницы', 'icon' => 'fa fa-tags', 'url' => ['/pages']],
                     ['label' => 'Таблицы на глвной', 'icon' => 'fa fa-tags', 'url' => ['/mainpage/view']],
                     ['label' => 'Баннеры', 'icon' => 'fa fa-tags', 'url' => ['/banner']],
+                    ['label' => 'Заявки', 'icon' => 'fa fa-tags', 'url' => ['/request-service']],
                 ],
             ]
         ) ?>

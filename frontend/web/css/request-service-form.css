@@ -1,0 +1,67 @@
+.request-service-form {
+    margin-top: 50px;
+}
+
+.request-service-form .field-label {
+    display: table;
+}
+
+.request-service-form .field-label > label {
+    display: table-cell;
+    vertical-align: middle;
+}
+.request-service-form .row.record
+{
+    margin-bottom: 20px;
+}
+
+.request-service-form .field-label, .request-service-form .field
+{
+    height: 40px;
+}
+
+.request-service-form .form-group.has-success .form-control
+{
+    border: 2px solid #e8e8e8;
+    box-shadow: none;
+}
+
+.v-align-top
+{
+    vertical-align: top!important;
+}
+.request-service-form .field
+{
+
+    box-shadow: none;
+    outline: none;
+    border-radius: 0;
+    border: 2px solid #e8e8e8;
+    padding: 10px;
+}
+
+@media (max-width: 992px) {
+    .request-service-form .row
+    {
+        display: block;
+    }
+    .request-service-form .row div
+    {
+        display: block;
+        float: none;
+    }
+    .request-service-form .row div.code
+    {
+        float: left;
+        width: 30%;
+    }
+    .request-service-form .row div.phone
+    {
+        float: left;
+        width: 70%;
+    }
+    .request-service-form .submit-button
+    {
+        width: 100%;
+    }
+}

@@ -16,6 +16,9 @@ use yii\helpers\Url;
                         <a href="<?=Url::toRoute(['main/index']);?>">Главная</a>
                     </li>
                     <li>
+                        <a href="<?=Url::toRoute(['/app']);?>">Заявка на продвижение</a>
+                    </li>
+                    <li>
                         <a href="<?=Url::toRoute(['main/pages']);?>">Карта сайта</a>
                     </li>
                     <li>

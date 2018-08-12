@@ -69,6 +69,7 @@ return [
                 'contact'=>'main/contact',
 
                 'types/<slug>' => 'activity-directions/get-by-type',
+                'app' => 'request-service/request',
             ],
         ],
         /*'reCaptcha' => [

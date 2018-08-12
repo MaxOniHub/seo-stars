@@ -531,3 +531,41 @@ ul.dropdown-menu li.selected {
         width: 100%;
     }
 }
+
+.preview-text
+{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.submit-button
+{
+    width: 223px;
+    height: 38px;
+    line-height: 36px;
+    font-family: ProximaNova,sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #fff;
+    background-color: #ff2250;
+    border: 1px solid #ff2250;
+    cursor: pointer;
+    transition: .2s;
+    padding: 0 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 0;
+}
+
+.submit-button:hover
+{
+    background-color: transparent;
+    color: #ff2250;
+}
+
+.success-request h1
+{
+    text-align: center;
+    margin: 20px;
+}
