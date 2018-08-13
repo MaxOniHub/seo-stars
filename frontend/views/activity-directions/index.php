@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var \common\models\ActivityDirection $activity
+ */
+
 $this->title = $activity->seo_title;
 $this->registerMetaTag([
     'name' => 'description',
@@ -12,7 +16,7 @@ $this->registerMetaTag([
 ?>
 
 <div class="align-center">
-    <div class="section-title blue-lined bottom-offset"><?= $activity->getTitle(); ?></div>
+    <div class="section-title blue-lined bottom-offset"><?= $activity->h1_title; ?></div>
 </div>
 
 <?=

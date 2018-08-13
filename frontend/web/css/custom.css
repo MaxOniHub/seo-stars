@@ -471,6 +471,11 @@ ul.dropdown-menu li.selected {
     .person-info .person-info-list {
         margin-top: 0px!important;
     }
+
+
+    .sidebar .item .popular-promotion>li a {
+        font-size: 15px;
+    }
 }
 
 /*
@@ -568,4 +573,11 @@ ul.dropdown-menu li.selected {
 {
     text-align: center;
     margin: 20px;
+}
+
+ul.popular-promotion li a,
+.popular-promotion.smaller-link>li a,
+.popular-promotion.vertical>li a
+{
+    font-size: 13px;
 }

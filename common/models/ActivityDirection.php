@@ -10,6 +10,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $title
+ * @property string $h1_title
  * @property string $alias
  * @property string $hex_border_color
  * @property integer $is_visible
@@ -37,9 +38,9 @@ class ActivityDirection extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'alias'], 'required'],
+            [['title', 'h1_title', 'alias'], 'required'],
             [['is_visible'], 'integer'],
-            [['title', 'alias', 'seo_title'], 'string', 'max' => 255],
+            [['title', 'h1_title', 'alias', 'seo_title'], 'string', 'max' => 255],
             [['hex_border_color'], 'string', 'max' => 7],
             ['activities_ids', 'safe'],
             [['seo_keys', 'seo_desc', 'about'], 'string'],
@@ -53,7 +54,8 @@ class ActivityDirection extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => Yii::t("app", "Название"),
+            'title' => Yii::t("app", "Название элемента в рамке"),
+            'h1_title' => Yii::t("app", "H1 (Заголовок на странице элемента)"),
             'alias' => Yii::t("app", "Алиас"),
             'hex_border_color' => Yii::t("app", "Цвет рамки и шрифта"),
             'is_visible' => Yii::t("app", "Показать на главной странице?"),

@@ -76,7 +76,7 @@ $form = ActiveForm::begin(['id' => 'addRequestService', 'options' => ['data-pjax
             <div class="<?= $widget->getLabelColumnOffset(); ?> text-right field-label">
             </div>
             <div class="<?= $widget->getFieldColumnOffset(); ?> form-group">
-                <?= Html::submitButton('Добавить', ['name' => 'add-button', 'class' => 'btn top-offset submit-button', 'onClick' => "ga('send', 'event', 'zayavka', 'click');"]) ?>
+                <?= Html::submitButton('Отправить', ['name' => 'add-button', 'class' => 'btn top-offset submit-button', 'onClick' => "ga('send', 'event', 'zayavka', 'click');"]) ?>
             </div>
         </div>
     </div>

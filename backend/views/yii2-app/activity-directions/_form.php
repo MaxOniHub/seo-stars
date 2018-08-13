@@ -23,6 +23,10 @@ use yii\widgets\ActiveForm;
         </div>
 
         <div class="col-md-3">
+            <?= $form->field($model, 'h1_title')->textInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class="col-md-3">
             <?= $form->field($model, 'alias')->textInput() ?>
         </div>
 
