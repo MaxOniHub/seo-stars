@@ -5,6 +5,7 @@ namespace backend\helpers;
 use common\helpers\WidgetsNamesHolder;
 use common\models\CountersTopPageWidgetSettings;
 use common\models\RegionsWidgetSettings;
+use common\models\SidebarBannerWidgetSettings;
 use Yii;
 
 class WidgetsSettingsFactory
@@ -13,13 +14,18 @@ class WidgetsSettingsFactory
     public function getWidgetSettings($widget_id)
     {
         if (WidgetsNamesHolder::COUNTERS_TOP_PAGE == $widget_id) {
-            /** @var CountersTopPageWidgetSettings $counterTopPage */
+            /** @var CountersTopPageWidgetSettings */
             return new CountersTopPageWidgetSettings();
         }
 
         if (WidgetsNamesHolder::REGIONS == $widget_id) {
-            /** @var RegionsWidgetSettings $counterTopPage */
+            /** @var RegionsWidgetSettings */
             return new RegionsWidgetSettings();
+        }
+
+        if (WidgetsNamesHolder::SIDEBAR_BANNER == $widget_id) {
+            /** @var SidebarBannerWidgetSettings */
+            return new SidebarBannerWidgetSettings();
         }
     }
 }

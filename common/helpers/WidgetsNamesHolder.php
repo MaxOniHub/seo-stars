@@ -11,4 +11,6 @@ class WidgetsNamesHolder
     const COUNTERS_TOP_PAGE = "counters_top_page";
 
     const REGIONS = "regions";
+
+    const SIDEBAR_BANNER = "sidebar_banner";
 }

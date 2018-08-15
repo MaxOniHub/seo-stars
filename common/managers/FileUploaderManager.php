@@ -99,7 +99,11 @@ class FileUploaderManager implements IFileUploader
      */
     public function getTargetDirectory()
     {
-        return $this->target_dir_path . "/" . $this->uid;
+        if ($this->uid)
+        {
+            return $this->target_dir_path . "/" . $this->uid;
+        }
+        return $this->target_dir_path;
     }
 
     /**

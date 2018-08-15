@@ -1,8 +1,15 @@
+<?php
+use common\managers\WidgetSettingsProvider;
+use common\data_mappers\WidgetSettingsDataMapper;
+use common\models\WidgetsSettings;
+use common\helpers\WidgetsNamesHolder;
+?>
 <div class="sidebar">
     <div class="item">
-        <a target="_blank" href="http://alhimiya.com/lp/seo-s-garantiej.html" class="banner image-cover">
-            <img src="<?= \yii\helpers\Url::to("/img/banner.jpg")?>">
-        </a>
+        <?php $widgetSettingsProvider = new WidgetSettingsProvider(new WidgetSettingsDataMapper(new WidgetsSettings()), new WidgetsNamesHolder());?>
+        <?= \frontend\components\SidebarBannerWidget::widget(['options' => $widgetSettingsProvider->getSideBarBannerWidgetSettings()]);?>
+
+
     </div>
     <div class="item">
         <div class="sidebar-title">Популярные направления</div>

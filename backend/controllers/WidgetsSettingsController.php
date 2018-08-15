@@ -5,6 +5,7 @@ use backend\helpers\WidgetsSettingsFactory;
 use common\data_mappers\WidgetSettingsDataMapper;
 use common\helpers\WidgetsNamesHolder;
 use common\interfaces\IWidgetSettings;
+use common\managers\FileUploaderManager;
 use common\models\ActivityDirectionSearch;
 use common\models\CountersTopPageWidgetSettings;
 use common\models\RegionsWidgetSettings;
@@ -13,6 +14,7 @@ use common\models\WidgetsSettingsSearch;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * WidgetsSettingsController
@@ -74,7 +76,7 @@ class WidgetsSettingsController extends Controller
         $widget = $WidgetsSettingsFactory->getWidgetSettings($id);
         $widget->initSettings($widgetSettings);
 
-        if ($widget->load(Yii::$app->request->post()))
+        if ($widget->load($this->getRequest()))
         {
             $WidgetSettingsDataMapper->load($widget);
             $WidgetSettingsDataMapper->save();
@@ -88,4 +90,34 @@ class WidgetsSettingsController extends Controller
     }
 
 
+    /**
+     * @return mixed
+     * @throws \yii\base\Exception
+     */
+    public function actionUploadMedia()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $key = Yii::$app->request->post('key');
+
+        if ($file = UploadedFile::getInstanceByName('file')) {
+            /** @var FileUploaderManager $FileUploaderManager */
+            $FileUploaderManager = new FileUploaderManager();
+
+            $links = $FileUploaderManager
+                ->setTargetDirectory($key)
+                ->bulkUpload([$file]);
+            if ($links) {
+
+                return $links[0]['origin'];
+            }
+        }
+        return false;
+    }
+
+
+    protected function getRequest()
+    {
+        return Yii::$app->request->post();
+    }
 }

@@ -41,4 +41,13 @@ class WidgetSettingsProvider
         return $this->dataMapper->findByPrimaryKey($key)->options;
     }
 
+    public function getSideBarBannerWidgetSettings()
+    {
+        /** @var WidgetsNamesHolder $class_name */
+        $class_name = get_class($this->WidgetsNamesHolder);
+        $key = $class_name::SIDEBAR_BANNER;
+
+        return $this->dataMapper->findByPrimaryKey($key)->options;
+    }
+
 }
