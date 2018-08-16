@@ -49,6 +49,10 @@ $this->registerMetaTag([
         "vkhref" => $vkhref
 ]) ?>
 
+
+
+
+
 <?= \frontend\components\SocialNewsWidget::widget(
     [
         "entity" => $company,

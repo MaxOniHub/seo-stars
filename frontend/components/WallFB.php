@@ -39,6 +39,11 @@
                 parse_str($parsed_url['query'], $parsed_uri);
                 return isset($parsed_uri['id']) ? $parsed_uri['id'] : false;
             }
+            if (isset($parsed_url['path']) && !empty($parsed_url['path']))
+            {
+                return $parsed_url['path'];
+            }
+
         }
         
     }

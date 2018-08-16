@@ -82,7 +82,7 @@ class MainController extends MyController
 
     public function actionCompany($alias, $uforom=false)
     {
-        $this->layout = "profile";
+        $this->layout = "company-profile";
 
         $company=(new Company())->getCompany($alias);
 

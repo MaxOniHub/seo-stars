@@ -8,4 +8,6 @@
         "comments" => $comments
     ]);
 ?>
-
+<div class="row">
+<?= \frontend\components\ReviewFormWidget::widget();?>
+</div>
