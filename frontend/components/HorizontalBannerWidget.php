@@ -4,7 +4,7 @@ namespace frontend\components;
 
 use yii\base\Widget;
 
-class SidebarBannerWidget extends Widget
+class HorizontalBannerWidget extends Widget
 {
     public $options;
 
@@ -16,7 +16,7 @@ class SidebarBannerWidget extends Widget
     public function run()
     {
         if (!$this->options['is_disabled']) {
-            return $this->render("sidebar-banner-widget/view", ["options" => $this->options, 'widget' => $this]);
+            return $this->render("horizontal-banner-widget/view", ["options" => $this->options, 'widget' => $this]);
         }
     }
 
@@ -24,4 +24,5 @@ class SidebarBannerWidget extends Widget
     {
         return $this->options['target'] ? "_blank" : "_self";
     }
+
 }

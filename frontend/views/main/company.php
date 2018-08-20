@@ -50,7 +50,7 @@ $this->registerMetaTag([
 ]) ?>
 
 
-
+<?= $this->render("/layouts/_h-banner-template"); ?>
 
 
 <?= \frontend\components\SocialNewsWidget::widget(

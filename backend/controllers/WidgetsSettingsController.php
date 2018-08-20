@@ -3,14 +3,11 @@ namespace backend\controllers;
 
 use backend\helpers\WidgetsSettingsFactory;
 use common\data_mappers\WidgetSettingsDataMapper;
-use common\helpers\WidgetsNamesHolder;
 use common\interfaces\IWidgetSettings;
-use common\managers\FileUploaderManager;
-use common\models\ActivityDirectionSearch;
-use common\models\CountersTopPageWidgetSettings;
-use common\models\RegionsWidgetSettings;
+use common\managers\FileUploaderManager;;
 use common\models\WidgetsSettings;
 use common\models\WidgetsSettingsSearch;
+use Intervention\Image\ImageManagerStatic as Image;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -109,7 +106,13 @@ class WidgetsSettingsController extends Controller
                 ->bulkUpload([$file]);
             if ($links) {
 
-                return $links[0]['origin'];
+                $image = Image::make($links[0]['origin']);
+
+                return [
+                    'path' => $links[0]['origin'],
+                    'width' => $image->getWidth(),
+                    'height' => $image->getHeight()
+                ];
             }
         }
         return false;

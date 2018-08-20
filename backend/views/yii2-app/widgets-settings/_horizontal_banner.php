@@ -27,28 +27,39 @@ use yii\helpers\Url;
 
             </div>
             <div class="row">
+
+                <div class="col-md-6">
+                    <?= $form->field($model, 'height')->textInput(['id' => 'height']) ?>
+                </div>
+
+                <div class="col-md-6">
+                    <?= $form->field($model, 'width')->textInput(['id' => 'width']) ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $form->field($model, 'target')->widget(SwitchInput::classname(), ['pluginOptions' => [
+                        'onText' => 'Да',
+                        'offText' => 'Нет',
+                    ]]); ?>
+                </div>
+                <div class="col-md-6">
+
+                    <?= $form->field($model, 'is_disabled')->widget(SwitchInput::classname(), ['pluginOptions' => [
+                        'onText' => 'Да',
+                        'offText' => 'Нет',
+                    ]]); ?>
+
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12">
                     <?= $form->field($model, 'url')->textInput() ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <?= $form->field($model, 'file_path')->textInput(['id' => 'file_path', 'readOnly' => true]) ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <?= $form->field($model, 'target')->widget(SwitchInput::classname(), [
-                        'pluginOptions' => [
-                            'onText' => 'Да',
-                            'offText' => 'Нет',
-                        ]]); ?>
-                </div>
-                <div class="col-md-6">
-                    <?= $form->field($model, 'is_disabled')->widget(SwitchInput::classname(), ['pluginOptions' => [
-                        'onText' => 'Да',
-                        'offText' => 'Нет',
-                    ]]); ?>
+                    <?= $form->field($model, 'file_path')->textInput(['id' => 'file_path', 'readonly'=> true]) ?>
                 </div>
             </div>
             <div class="row">
@@ -69,26 +80,26 @@ use yii\helpers\Url;
                         'pluginEvents' => [
                             'fileuploaded' => 'function(event, file, previewId, index) { 
                             $("#file_path").val(file.response.path);
+                            $("#width").val(file.response.width);
+                            $("#height").val(file.response.height);
                         }',
                         ],
                     ]);
                     ?>
                 </div>
             </div>
-
         </div>
 
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-6">
-                <?php if ($model->file_path): ?>
-                    <?= Html::img($model->file_path, ['class' => 'img-rounded', 'width' => '75%']); ?>
-                <?php endif; ?>
-            </div>
+                    <?php if ($model->file_path): ?>
+                        <?= Html::img($model->file_path, ['class' => 'img-rounded', 'width' => '75%']); ?>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
-
     <div style="margin-bottom: 50px"></div>
     <div class="row">
         <div class="col-md-6">

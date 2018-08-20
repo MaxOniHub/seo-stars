@@ -24,6 +24,18 @@
     float: none;
 }
 
+.banner
+ {
+    overflow: hidden;
+    width: 100%;
+ }
+
+.horizontal-banner
+{
+    margin-top: 50px;
+    text-align: center;
+}
+
 ul.sort {
 
     list-style: none;

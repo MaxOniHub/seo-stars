@@ -13,4 +13,6 @@ class WidgetsNamesHolder
     const REGIONS = "regions";
 
     const SIDEBAR_BANNER = "sidebar_banner";
+
+    const HORIZONTAL_BANNER = "horizontal_banner";
 }

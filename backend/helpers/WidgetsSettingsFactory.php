@@ -4,6 +4,7 @@ namespace backend\helpers;
 
 use common\helpers\WidgetsNamesHolder;
 use common\models\CountersTopPageWidgetSettings;
+use common\models\HorizontalBannerWidgetSettings;
 use common\models\RegionsWidgetSettings;
 use common\models\SidebarBannerWidgetSettings;
 use Yii;
@@ -26,6 +27,11 @@ class WidgetsSettingsFactory
         if (WidgetsNamesHolder::SIDEBAR_BANNER == $widget_id) {
             /** @var SidebarBannerWidgetSettings */
             return new SidebarBannerWidgetSettings();
+        }
+
+        if (WidgetsNamesHolder::HORIZONTAL_BANNER == $widget_id) {
+            /** @var HorizontalBannerWidgetSettings */
+            return new HorizontalBannerWidgetSettings();
         }
     }
 }
