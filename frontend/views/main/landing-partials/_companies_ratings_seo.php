@@ -1,5 +1,5 @@
 <div class="align-center">
-    <div class="section-title blue-lined bottom-offset">Рейтинг SEO компаний</div>
+    <h2 class="section-title blue-lined bottom-offset">Рейтинг SEO компаний</h2>
 </div>
 
 <div class="row">

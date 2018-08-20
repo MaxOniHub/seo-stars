@@ -1,6 +1,6 @@
 
     <div class="align-center">
-        <div class="section-title blue-lined top-offset bottom-offset">Рейтинг SEO компаний - SEO Stars</div>
+        <h2 class="section-title blue-lined top-offset bottom-offset">Рейтинг SEO компаний - SEO Stars</h2>
     </div>
 
     <div class="row">

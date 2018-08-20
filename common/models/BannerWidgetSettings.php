@@ -54,6 +54,7 @@ class BannerWidgetSettings extends Model implements IWidgetSettings
         $this->width = $settings["width"];
         $this->height = $settings["height"];
         $this->is_disabled = $settings["is_disabled"];
+        $this->target = $settings["target"];
 
     }
 
